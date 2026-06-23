@@ -3,7 +3,7 @@ import fs from 'fs'
 const file = "./src/repositories/data/users.json"
 
 export class UserRepository {
-    async create(user){
+    create(user) {
         const newUser = {
             id: user.id,
             name: user.name,
@@ -12,7 +12,7 @@ export class UserRepository {
             role: user.role
         };
 
-        const users = await JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
 
         users.push(newUser);
 
@@ -24,18 +24,25 @@ export class UserRepository {
 
     }
 
-    async findByEmail(email){
+    findById(id) {
         const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
-        const finded = users.find(u => u.email === email)
+        const finded = users.find(u => u.id === id);
 
-        if(finded){
+        return finded;
+    }
+
+    findAll() {
+        return JSON.parse(fs.readFileSync(file, 'utf-8'));
+    }
+
+    findByEmail(email) {
+        const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const finded = users.find(u => u.email === email);
+
+        if (finded) {
             return true
         }
 
         return false;
-    }
-
-    async findAll(){
-        return JSON.parse(fs.readFileSync(file, 'utf-8'))
     }
 }
