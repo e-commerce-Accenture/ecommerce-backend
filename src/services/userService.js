@@ -41,6 +41,10 @@ export class UserService {
     async findById(id) {
         const finded = await this.userRepository.findById(id);
 
+        if(!finded){
+            return [];
+        }
+
         const { passwordHash, ...user } = finded;
 
         return user;
