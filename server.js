@@ -10,8 +10,8 @@ app.use(express.json());
 
 // Rotas
 
-app.use("/api/auth", require('./backend/routes/auth'));
-app.use("/api/cart", require('./backend/routes/cart'));
+app.use("/api/auth", require('./src/routes/auth'));
+app.use("/api/cart", require('./src/routes/cart'));
 
 // Rotas para quem for juntar
 
