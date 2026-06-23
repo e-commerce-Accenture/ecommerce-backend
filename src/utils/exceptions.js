@@ -40,6 +40,14 @@ class BadRequestException extends BusinessException {
         super(message, 400);
         this.name = 'BadRequestException';
     }
+
+}
+// serviço externo indisponível ou falhando, tipo a IA caiu
+class ServiceUnavailableException extends BusinessException {
+    constructor(message) {
+        super(message, 503);
+        this.name = 'ServiceUnavailableException';
+    }
 }
 export {
     BusinessException,
