@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "64dc38b1-ddbe-4025-a15a-70080c1f21a0",
+    "name": "Admin",
+    "email": "admin@nextgen.com",
+    "passwordHash": "$2b$10$YmP2ThYgAPFJjaeTLt/0KOZJK/T/47.WTSpVq3aSg2aEv2xp68C/W",
+    "role": "admin"
+  },
+  {
+    "id": "b6ee58ba-1fd3-4b66-84ac-8a75a7eadb2c",
+    "name": "Joe",
+    "email": "emnail@gmail.com",
+    "passwordHash": "$2b$10$0zQIOfc4U91P1lLaDr9az.cqcD6pWLbGdgSd9UWm8DkU.PtSQvp9q",
+    "role": "client"
+  }
+]

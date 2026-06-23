@@ -1,6 +1,12 @@
-const router = require('express').Router();
-const fs = require('fs');
-const path = require('path');
+import { Router } from 'express';
+import fs from 'fs'
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const router = Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const cartsPath = path.join(__dirname, '../data/carts.json');
 const productsPath = path.join(__dirname, '../data/products.json');
@@ -88,4 +94,4 @@ router.delete('/:id', (req, res) => {
     res.json({ message: 'Produto removido do carrinho', cart });
 });
 
-module.exports = router;
+export default router
