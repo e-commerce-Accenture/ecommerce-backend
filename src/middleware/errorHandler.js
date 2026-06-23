@@ -1,9 +1,16 @@
 import messages from '../utils/messages.js';
-import { BusinessException } from '../utils/exceptions.js';
+import { BusinessException, ForbiddenException } from '../utils/exceptions.js';
 
 const errorHandler = (err, req, res, next) => {
     // erro que vem de uma regra de negocio(email duplo, não enctrd, etc.)
     if (err instanceof BusinessException) {
+        return res.status(err.statusCode).json({
+            error: err.name,
+            message: err.message
+        })
+    }
+
+    if (err instanceof ForbiddenException) {
         return res.status(err.statusCode).json({
             error: err.name,
             message: err.message

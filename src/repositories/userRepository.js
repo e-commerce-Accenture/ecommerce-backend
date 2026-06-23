@@ -56,11 +56,7 @@ export class UserRepository {
         const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
         const finded = users.find(u => u.email === email);
 
-        if (finded) {
-            return true
-        }
-
-        return false;
+        return finded;
     }
 
     deleteById(id){
