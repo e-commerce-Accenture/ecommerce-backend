@@ -40,5 +40,12 @@
     "email": "joao@teste.com",
     "passwordHash": "$2b$10$jU3yaLoMht/43H88Y7PjEO63FLX0xYmdeS9y9t8o6o6yS0mN9Nf8S",
     "role": "client"
+  },
+  {
+    "id": "9bfd1768-7787-4cc9-9bae-449581333860",
+    "name": "Ana",
+    "email": "ana@email.com",
+    "passwordHash": "$2b$10$hO8nKP.CQtjpBhOT5QEe4eXQQBT1wx6aJPNuxzz5Cnmc2.b6DqEPy",
+    "role": "client"
   }
 ]
