@@ -6,6 +6,14 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import messages from '../utils/messages.js';
+import {
+    ConflictException,
+    NotFoundException,
+    UnauthorizedException
+}
+
+    from '../utils/exceptions.js';
 
 const router = Router();
 
@@ -30,7 +38,8 @@ router.post('/register', async (req, res) => {
 
     const userExists = users.find(u => u.email === email);
     if (userExists) {
-        return res.status(400).json({ message: "Email já cadastrado" });
+        // email ja cadastrado = 409
+        throw new ConflictException(messages.auth.EMAIL_ALREADY_EXISTS);
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -46,7 +55,7 @@ router.post('/register', async (req, res) => {
     users.push(newUser);
     saveUsers(users);
 
-    res.status(201).json({ message: 'Usuario criado com sucesso' });
+    res.status(201).json({ message: messages.auth.REGISTER_SUCCESS });
 });
 
 router.post('/login', async (req, res) => {
@@ -56,11 +65,13 @@ router.post('/login', async (req, res) => {
 
     const user = users.find(u => u.email === email);
     if (!user) {
-        return res.status(404).json({ message: 'Usuário não encontrado' });
+        // não achou usuário = 404
+        throw new NotFoundException(messages.auth.USER_NOT_FOUND);
     }
     const passwordMatch = await bcrypt.compare(password, user.passwordHash);
     if (!passwordMatch) {
-        return res.status(401).json({ message: 'Senha incorreta' });
+        //senha errada = 401
+        throw new UnauthorizedException(messages.auth.INVALID_PASSWORD);
     }
 
     const token = jwt.sign(

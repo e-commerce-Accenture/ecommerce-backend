@@ -3,13 +3,17 @@ import fs from 'fs'
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import messages from '../utils/messages.js';
+import { NotFoundException } from '../utils/exceptions.js';
+
 const router = Router();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const cartsPath = path.join(__dirname, '../data/carts.json');
-const productsPath = path.join(__dirname, '../data/products.json');
+// Corrigir o caminho relativo pra arquivos JSON
+const cartsPath = path.join(__dirname, '../repositories/data/carts.json');
+const productsPath = path.join(__dirname, '../repositories/data/products.json');
 
 // Funções auxiliares
 const getCart = () => {
@@ -40,7 +44,8 @@ router.post('/', (req, res) => {
     const product = products.find(p => p.id === productId);
 
     if (!product) {
-        return res.status(404).json({ message: 'Produto não encontrado' });
+        // Code: 404, Exception: O produto não existe na base de dados.
+        throw new NotFoundException(messages.product.NOT_FOUND);
     }
 
     const cart = getCart();
@@ -70,7 +75,8 @@ router.patch('/:id', (req, res) => {
     const item = cart.find(i => i.productId === id);
 
     if (!item) {
-        return res.status(404).json({ message: 'Item não encontrado no carrinho' });
+        // Code: 404, Exception: O item não existe no carrinho.
+        throw new NotFoundException(messages.cart.ITEM_NOT_FOUND);
     }
 
     item.quantity = quantity;
@@ -86,7 +92,8 @@ router.delete('/:id', (req, res) => {
     const itemExists = cart.find(i => i.productId === id);
 
     if (!itemExists) {
-        return res.status(404).json({ message: 'Item não encontrado no carrinho' });
+        // Code: 404, Exception: O item não existe no carrinho.
+        throw new NotFoundException(messages.cart.ITEM_NOT_FOUND);
     }
 
     cart = cart.filter(i => i.productId !== id);

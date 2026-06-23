@@ -33,5 +33,12 @@
     "email": "jasond@email.com",
     "passwordHash": "$2b$10$dYSGLfpoAG/F3DliioLt8.63otxaxaCsLs517gnCwIqxg6GM7Zo7m",
     "role": "client"
+  },
+  {
+    "id": "9a7b2551-ffa7-477f-ae15-1594df4c86df",
+    "name": "João",
+    "email": "joao@teste.com",
+    "passwordHash": "$2b$10$jU3yaLoMht/43H88Y7PjEO63FLX0xYmdeS9y9t8o6o6yS0mN9Nf8S",
+    "role": "client"
   }
 ]
