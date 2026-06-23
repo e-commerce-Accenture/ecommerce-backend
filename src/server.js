@@ -3,8 +3,9 @@ import express from 'express';
 import 'dotenv/config';
 import cartRouter from './routes/cart.js';
 import authRouter from './routes/auth.js';
-import router from './routes/userRouter.js';
+import userRouter from './routes/userRouter.js';
 import errorHandler from './middleware/errorHandler.js';
+import AIRouter from './routes/AIRouter.js';
 
 const app = express();
 app.use(cors());
@@ -14,7 +15,8 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/api/cart", cartRouter);
-app.use("/api/users", router);
+app.use("/api/users", userRouter);
+app.use('/api/ai', AIRouter)
 app.use(errorHandler);
 
 // Rotas para quem for juntar
