@@ -12,5 +12,19 @@
     "email": "emnail@gmail.com",
     "passwordHash": "$2b$10$0zQIOfc4U91P1lLaDr9az.cqcD6pWLbGdgSd9UWm8DkU.PtSQvp9q",
     "role": "client"
+  },
+  {
+    "id": "36eaa467-ee92-4cc6-b144-96a9b25730d5",
+    "name": "Joe",
+    "email": "emnadasfil@gmaidl.com",
+    "passwordHash": "$2b$10$gTlQ.gtli6KqlEVTwLIWjOIamk8qf26CrUUpCcjmBELcyPMPA/BTy",
+    "role": "client"
+  },
+  {
+    "id": "bef70aae-2910-41ff-abe6-0946f4eec9a0",
+    "name": "Joe",
+    "email": "emnadasfdil@gmaidl.com",
+    "passwordHash": "$2b$10$0oEVPFsinYHSZw9gItSf/uZUX25U8Bmsi77MT9JEJpbv8TZn8SqRy",
+    "role": "client"
   }
 ]

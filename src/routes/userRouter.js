@@ -5,6 +5,7 @@ const userController = new UserController();
 const router = Router();
 
 router
-    .get('/', userController.getUsers);
+    .get('/', userController.getUsers)
+    .post('/', userController.register)
 
 export default router;

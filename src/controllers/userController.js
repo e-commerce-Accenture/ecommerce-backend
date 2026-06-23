@@ -5,12 +5,26 @@ const repository = new UserRepository();
 const userService = new UserService(repository);
 
 export class UserController {
-    async getUsers(_, res){
+
+    async register(req, res) {
+        const { name, email, password } = req.body;
+
+        try {
+            const response = await userService.create(name, email, password);
+
+            return res.status(201).json(response)
+        } catch (error) {
+            res.status(500).json({ error: error.message })
+        }
+    }
+
+    async getUsers(_, res) {
         try {
             const response = await userService.findAll();
-            res.status(200).send(response)
+            return res.status(200).json(response)
+
         } catch (error) {
-            res.status(500)
+            return res.status(500)
         }
     }
 }
