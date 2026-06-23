@@ -33,5 +33,12 @@
     "email": "jasond@email.com",
     "passwordHash": "$2b$10$dYSGLfpoAG/F3DliioLt8.63otxaxaCsLs517gnCwIqxg6GM7Zo7m",
     "role": "client"
+  },
+  {
+    "id": "ec0b42de-053f-4646-8972-6541e310c3dd",
+    "name": "Ana",
+    "email": "ana@email.com",
+    "passwordHash": "$2b$10$JsVcsDE/bsZsezXh1LIqVuaGVqHCP3pxpuUQLhKPy6R3kJLtXfpLa",
+    "role": "client"
   }
 ]
