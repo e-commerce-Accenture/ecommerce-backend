@@ -49,4 +49,21 @@ export class UserService {
 
         return user;
     }
+
+    async update(id, data){
+        try {
+            const isExist = await this.userRepository.findById(id);
+    
+            if(!isExist) throw new Error('User not found');
+    
+            const updatedUser = await this.userRepository.update(id, data);
+            
+            const {passwordHash, ...user} = updatedUser;
+
+            return user;
+            
+        } catch (error) {
+            throw error;
+        }
+    }
 }

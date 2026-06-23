@@ -28,7 +28,7 @@ export class UserController {
         }
     }
 
-    async getUserById(req, res){
+    async getUserById(req, res) {
         const { id } = req.params
 
         try {
@@ -36,7 +36,21 @@ export class UserController {
 
             res.status(200).json(response);
         } catch (error) {
-            res.status(500).json({error: error.message})
+            res.status(500).json({ error: error.message })
         }
+    }
+
+    async updateUser(req, res) {
+        const { id } = req.params;
+        const { name, email } = req.body
+
+        try {
+            const response = await userService.update(id, {name, email})
+
+            res.status(200).json(response)
+        } catch (error) {
+            res.status(500).json({ error: error.message })
+        }
+
     }
 }
