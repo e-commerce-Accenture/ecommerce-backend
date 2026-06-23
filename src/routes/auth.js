@@ -14,40 +14,6 @@ const __dirname = path.dirname(__filename);
 
 const usersPath = path.join(__dirname, '../repositories/data/users.json');
 
-const getUsers = () => {
-    const data = fs.readFileSync(usersPath, 'utf-8');
-    return JSON.parse(data);
-};
-
-const saveUsers = (users) => {
-    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
-};
-
-router.post('/register', async (req, res) => {
-    const { name, email, password } = req.body;
-
-    const users = getUsers();
-
-    const userExists = users.find(u => u.email === email);
-    if (userExists) {
-        return res.status(400).json({ message: "Email já cadastrado" });
-    }
-
-    const passwordHash = await bcrypt.hash(password, 10);
-
-    const newUser = {
-        id: uuidv4(),
-        name,
-        email,
-        passwordHash,
-        role: 'client'
-    };
-
-    users.push(newUser);
-    saveUsers(users);
-
-    res.status(201).json({ message: 'Usuario criado com sucesso' });
-});
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
