@@ -46,7 +46,7 @@ const messages = {
         INTERNAL_ERROR: 'Erro interno do servidor.',
         NOT_FOUND: 'Recurso não encontrado.',
         BAD_REQUEST: 'Requisição inválida.',
-        AI_REQUISITION_FAILED: "AI requisition failed"
+        AI_REQUISITION_FAILED: "Falha na requisição",
     },
 };
 export default messages;
