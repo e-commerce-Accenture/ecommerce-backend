@@ -62,4 +62,15 @@ export class UserRepository {
 
         return false;
     }
+
+    deleteById(id){
+        const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const index = users.findIndex(u => u.id == id);
+
+        users.splice(index, 1);
+
+        const usersUpdated = JSON.stringify(users, null, 2);
+
+        fs.writeFileSync(file, usersUpdated);
+    }
 }

@@ -12,7 +12,7 @@ const router = Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const usersPath = path.join(__dirname, '../data/users.json');
+const usersPath = path.join(__dirname, '../repositories/data/users.json');
 
 const getUsers = () => {
     const data = fs.readFileSync(usersPath, 'utf-8');

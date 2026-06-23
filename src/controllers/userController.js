@@ -34,9 +34,9 @@ export class UserController {
         try {
             const response = await userService.findById(id);
 
-            res.status(200).json(response);
+            return res.status(200).json(response);
         } catch (error) {
-            res.status(500).json({ error: error.message })
+            return res.status(500).json({ error: error.message })
         }
     }
 
@@ -45,12 +45,23 @@ export class UserController {
         const { name, email } = req.body
 
         try {
-            const response = await userService.update(id, {name, email})
+            const response = await userService.update(id, { name, email })
 
-            res.status(200).json(response)
+            return res.status(200).json(response)
         } catch (error) {
-            res.status(500).json({ error: error.message })
+            return res.status(500).json({ error: error.message })
         }
 
+    }
+
+    async deleteUser(req, res) {
+        const { id } = req.params
+
+        try {
+            await userService.delete(id)
+            return res.status(204).send()
+        } catch (error) {
+            return res.status(500).json({error: error.message})
+        }
     }
 }

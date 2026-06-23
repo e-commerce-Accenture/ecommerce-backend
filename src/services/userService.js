@@ -66,4 +66,12 @@ export class UserService {
             throw error;
         }
     }
+
+    async delete(id){
+        const isExist = await this.userRepository.findById(id);
+
+        if(!isExist) throw new Error('User not found');
+
+        await this.userRepository.deleteById(id);
+    }
 }
