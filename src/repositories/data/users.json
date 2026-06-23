@@ -7,13 +7,6 @@
     "role": "admin"
   },
   {
-    "id": "b6ee58ba-1fd3-4b66-84ac-8a75a7eadb2c",
-    "name": "Joe",
-    "email": "emnail@gmail.com",
-    "passwordHash": "$2b$10$0zQIOfc4U91P1lLaDr9az.cqcD6pWLbGdgSd9UWm8DkU.PtSQvp9q",
-    "role": "client"
-  },
-  {
     "id": "36eaa467-ee92-4cc6-b144-96a9b25730d5",
     "name": "Joe",
     "email": "emnadasfil@gmaidl.com",
@@ -46,6 +39,27 @@
     "name": "Ana",
     "email": "ana@email.com",
     "passwordHash": "$2b$10$hO8nKP.CQtjpBhOT5QEe4eXQQBT1wx6aJPNuxzz5Cnmc2.b6DqEPy",
+    "role": "client"
+  },
+  {
+    "id": "926112fb-4225-4a8f-9371-5dccac35cb52",
+    "name": "Ana",
+    "email": "anaa@email.com",
+    "passwordHash": "$2b$10$T5JcjOCu5Mup0Bvx0RXtcuuBIwi9QegL.QuTvBMpIBod3Ox.063xm",
+    "role": "client"
+  },
+  {
+    "id": "d946d5b2-7ee8-4edb-a580-8ca01fbbfe7a",
+    "name": "Jason",
+    "email": "anaad@emdail.com",
+    "passwordHash": "$2b$10$U7bQZyKP1RZ5xELSapREu.z87/lji23SYd8SrAq9RbmRajItkG752",
+    "role": "client"
+  },
+  {
+    "id": "43d83d8f-32ba-4bd8-8beb-da1352e3de16",
+    "name": "Ana",
+    "email": "ansaa@email.com",
+    "passwordHash": "$2b$10$ELeB5D9KKDaoWsru8golIOO4C006nnlYPRBLWTCVS2hImFwacRpYe",
     "role": "client"
   }
 ]

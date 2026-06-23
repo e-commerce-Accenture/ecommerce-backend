@@ -6,6 +6,20 @@ class BusinessException extends Error {
         this.isBusinessError = true;
     }
 }
+
+class UserAlreadyExists extends BusinessException {
+    constructor(message) {
+        super(message, 409);
+        this.name = 'UserAlreadyExists';
+    }
+}
+
+class EmailAlreadyExists extends BusinessException {
+    constructor(message) {
+        super(message, 409);
+        this.name = 'EmailAlreadyExists';
+    }
+}
 // recurso não encontrado
 class NotFoundException extends BusinessException {
     constructor(message) {
@@ -13,6 +27,21 @@ class NotFoundException extends BusinessException {
         this.name = 'NotFoundException';
     }
 }
+
+class UserNotFound extends NotFoundException {
+    constructor(message) {
+        super(message, 404);
+        this.name = 'UserNotFound';
+    }
+}
+
+class InvalidCredentials extends BusinessException {
+    constructor(message) {
+        super(message, 401);
+        this.name = 'InvalidCredentials';
+    }
+}
+
 // não autenticado (sem token ou senha errada)
 class UnauthorizedException extends BusinessException {
     constructor(message) {
@@ -44,6 +73,10 @@ class BadRequestException extends BusinessException {
 export {
     BusinessException,
     NotFoundException,
+    UserNotFound,
+    UserAlreadyExists,
+    EmailAlreadyExists,
+    InvalidCredentials,
     UnauthorizedException,
     ForbiddenException,
     ConflictException,

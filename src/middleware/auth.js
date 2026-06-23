@@ -1,32 +1,33 @@
 import jwt from 'jsonwebtoken'
 import messages from '../utils/messages.js';
+import { ForbiddenException } from '../utils/exceptions.js';
 
 
-export const verifyToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+export const authMiddleware = (req, res, next) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
 
     if (!token) {
-        return res.status(401)
-            .json({ message: messages.auth.TOKEN_MISSING });
+        return res.status(401).json({ error: "Token not found" })
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) {
-            return res.status(403)
-                .json({ message: messages.auth.TOKEN_INVALID });
+    try {
+        const verify = jwt.verify(token, process.env.JWT_SECRET);
 
-        }
-        req.user = user;
+        req.user = verify;
+
         next();
-    })
+    } catch (error) {
+        return res.status(403).json({ error: 'Invalid token or expired.' })
+    }
 }
 
-export const isAdmin = (req, res, next) => {
-    if (req.user.role !== 'admin') {
-        return res.status(403)
-            .json({ message: messages.auth.FORBIDDEN });
+export function authorizationRoles(...roles) {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            throw new ForbiddenException('Not Authorized');
+        }
 
+        next();
     }
-    next();
 }
