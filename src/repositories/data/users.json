@@ -68,5 +68,12 @@
     "email": "ansaadd@email.com",
     "passwordHash": "$2b$10$gKOYTtEhAEt8kBCKfnh/nOrpaTnhH2VX11XqlxMWnNcwpn/YUVEJG",
     "role": "client"
+  },
+  {
+    "id": "aefdd775-2ca1-47e1-955a-ecc581821c8f",
+    "name": "Cart",
+    "email": "cart@gmail.com",
+    "passwordHash": "$2b$10$3s9FCOu59BFFQ180oHrxvupeZ0QboW9EKBp0XkndsM2CbtgX19gP2",
+    "role": "client"
   }
 ]

@@ -1,16 +1,22 @@
 import fs from 'fs'
 
-const file = "./src/repositories/data/carts.json"
+const file = "./src/repositories/data/cart.json"
 
 export class CartRepository {
-    create(cart) {
+    create(data) {
         const carts = JSON.parse(fs.readFileSync(file, 'utf-8'));
 
-        carts.push(cart);
+        const newCart = {
+            id: data.id,
+            userId: data.userId,
+            items: []
+        }
+
+        carts.push(newCart);
 
         fs.writeFileSync(file, JSON.stringify(carts, null, 2));
 
-        return cart;
+        return data;
     }
 
     findByProductId(productId) {
@@ -19,41 +25,49 @@ export class CartRepository {
         return finded;
     }
 
+    findByUserId(userId) {
+        const carts = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const finded = carts.find(c => c.userId === userId);
+        return finded;
+    }
+
     findAll() {
         return JSON.parse(fs.readFileSync(file, 'utf-8'));
     }
 
-    update(productId, data ) {
+    updateItem(id, productId, quantity) {
         const carts = JSON.parse(fs.readFileSync(file, 'utf-8'));
-        const index = carts.findIndex(u => u.productId === productId);
+        const cart = carts.find(c => c.id === id);
 
-        if(index === -1) {
+        const itemIndex = cart.items.findIndex(i => i.productId === productId)
+
+        if (itemIndex === -1) {
             return null;
         }
 
-        carts[index] = {
-            ...carts[index],
-            ...data
+        cart.items[itemIndex] = {
+            ...cart.items[itemIndex],
+            ...(quantity && { quantity: quantity })
         };
 
         fs.writeFileSync(file, JSON.stringify(carts, null, 2));
 
-        return carts[index];
+        return cart.items[itemIndex];
 
     }
 
-    delete(productId) {
-        const carts  = JSON.parse(fs.readFileSync(file, 'utf-8'));
-        const index = carts.findIndex(u => u.productId === productId);
+    deleteItem(userId, productId) {
+        const carts = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const cart = carts.find(c => c.userId === userId);
 
-        if(index === -1) {
+        const itemIndex = cart.items.findIndex(i => i.productId === productId);
+
+        if (itemIndex === -1) {
             return null;
         }
 
-        carts.splice(index, 1);
+        cart.items.splice(itemIndex, 1);
 
         fs.writeFileSync(file, JSON.stringify(carts, null, 2));
-
-        return true;
     }
 }
