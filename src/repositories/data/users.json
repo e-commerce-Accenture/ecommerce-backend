@@ -7,13 +7,6 @@
     "role": "admin"
   },
   {
-    "id": "b6ee58ba-1fd3-4b66-84ac-8a75a7eadb2c",
-    "name": "Joe",
-    "email": "emnail@gmail.com",
-    "passwordHash": "$2b$10$0zQIOfc4U91P1lLaDr9az.cqcD6pWLbGdgSd9UWm8DkU.PtSQvp9q",
-    "role": "client"
-  },
-  {
     "id": "36eaa467-ee92-4cc6-b144-96a9b25730d5",
     "name": "Joe",
     "email": "emnadasfil@gmaidl.com",

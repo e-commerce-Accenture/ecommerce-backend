@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "@google/genai": "^2.9.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
@@ -10,9 +11,10 @@
   },
   "scripts": {
     "dev": "nodemon ./src/server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node ./src/repositories/seeds/seed.js"
   },
   "devDependencies": {
-    "nodemon": "^3.x.x"
+    "nodemon": "^3.1.14"
   }
 }

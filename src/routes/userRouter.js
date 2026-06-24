@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController.js";
+import { authorizationRoles } from "../middleware/auth.js";
 
 const userController = new UserController();
 const router = Router();
 
 router
-    .get('/', userController.getUsers)
-    .get('/:id', userController.getUserById)
-    .post('/', userController.register)
-    .patch('/:id', userController.updateUser)
+    .get('/', authorizationRoles('admin'), userController.getUsers)
+    .get('/:id', authorizationRoles('admin') ,userController.getUserById)
+    .patch('/:id', authorizationRoles('admin'), userController.updateUser)
     .delete('/:id', userController.deleteUser)
 
 export default router;
