@@ -54,7 +54,7 @@ export class UserRepository {
 
     findByEmail(email) {
         const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
-        const finded = users.find(u => u.email === email);
+        const finded = users.find(u => u.email == email);
 
         return finded;
     }

@@ -89,4 +89,5 @@ export {
     ForbiddenException,
     ConflictException,
     BadRequestException,
+    ServiceUnavailableException
 };

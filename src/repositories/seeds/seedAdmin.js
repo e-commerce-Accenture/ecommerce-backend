@@ -7,9 +7,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const usersPath = path.join(__dirname, 'src/data/users.json');
+const usersPath = path.join(__dirname, '../data/users.json');
 
-const seedAdmin = async () => {
+export const seedAdmin = async () => {
     const users = JSON.parse(fs.readFileSync(usersPath, 'utf-8'));
 
     const adminExists = users.find(u => u.role === 'admin');
