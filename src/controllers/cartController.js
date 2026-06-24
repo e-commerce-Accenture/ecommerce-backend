@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { CartRepository } from "../repositories/cartRepository";
-import { CartService } from "../services/cartService";
+import { CartRepository } from "../repositories/cartRepository.js";
+import { CartService } from "../services/cartService.js";
 
 
 const repository = new CartRepository();
@@ -38,6 +38,7 @@ export class CartController {
 
             return res.json(result);
         } catch (error) {
+            console.log(error)
             return res.status(400).json({ message: error.message});
         }
     }

@@ -33,19 +33,19 @@ export class CartService {
     }
 
     async updateQuantity(productId, quantity) {
-        const item = this.cartRepository.findByProduct(productId);
+        const item = this.cartRepository.findByProductId(productId);
 
         if(!item) {
             throw new Error('item não encontrado no carrinho');
         }
 
-        return this.cartRepository.updateCart(productId, {
-            quantity: cartItem.quantity + quantity
+        return this.cartRepository.update(productId, {
+            quantity: item.quantity + quantity
         });
     }
 
     async removeProduct(productId) {
-        const item = this.cartRepository.findByProduct(productId);
+        const item = this.cartRepository.findByProductId(productId);
 
         if(!item) {
             throw new Error('Item não encontrado no carrinho');
