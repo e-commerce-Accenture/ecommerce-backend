@@ -1,6 +1,9 @@
+import { UserNotFound } from "../utils/exceptions.js";
+
 export class CartService {
-    constructor(cartRepository, productRepository) {
+    constructor(cartRepository, userRepository, productRepository) {
         this.cartRepository = cartRepository;
+        this.userRepository = userRepository;
         this.productRepository = productRepository;
     }
 
@@ -28,29 +31,29 @@ export class CartService {
             });
     }
 
-    async getCart() {
-        return this.cartRepository.findAll();
+    async getUserCart(id){
+        try {
+            const userExists = await this.userRepository.findById(id);
+            if(!userExists) throw new UserNotFound(`User with id ${id} not found.`);
+    
+            const cart = await this.cartRepository.findByUserId(id);
+
+            return cart;
+            
+        } catch (error) {
+            throw error;
+        }
     }
 
-    async updateQuantity(productId, quantity) {
-        const item = this.cartRepository.findByProductId(productId);
+    async updateItem(userId, productId, data) {
+        const cart = this.cartRepository.findByUserId(userId);
 
-        if(!item) {
-            throw new Error('item não encontrado no carrinho');
-        }
-
-        return this.cartRepository.update(productId, {
-            quantity: item.quantity + quantity
-        });
+        return await this.cartRepository.updateItem(cart.id, productId, data)
     }
 
-    async removeProduct(productId) {
-        const item = this.cartRepository.findByProductId(productId);
+    async removeProduct(userId, productId) {
+        const cart = await this.cartRepository.findByUserId(userId);       
 
-        if(!item) {
-            throw new Error('Item não encontrado no carrinho');
-        }
-
-        return this.cartRepository.delete(productId);
+        await this.cartRepository.deleteItem(userId, productId);
     }
 }

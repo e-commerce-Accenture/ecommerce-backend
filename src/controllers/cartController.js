@@ -1,57 +1,63 @@
-import { Router } from "express"
+import { response, Router } from "express"
 import { CartRepository } from "../repositories/cartRepository.js";
 import { CartService } from "../services/cartService.js";
+import { UserRepository } from "../repositories/userRepository.js";
 
 
-const repository = new CartRepository();
-const service = new CartService(repository);
+const cartRepository = new CartRepository();
+const userRepository = new UserRepository();
+const cartService = new CartService(cartRepository, userRepository);
 
 
 export class CartController {
-    
-    async getCart(req, res) {
+
+    async getUserCart(req, res, next) {
+        const { id } = req.user;
+
         try {
-            const cart = await service.getCart();
-            return res.json(cart);
+            const response = await cartService.getUserCart(id);
+
+            return res.status(200).json(response)
         } catch (error) {
-            return res.status(500).json({ message: error.message});
+            next(error)
         }
     }
 
-    async addProduct(req, res) {
+    async addProduct(req, res, next) {
         try {
             const { productId, quantity } = req.body;
-            const result = await service.addProduct(productId, quantity);
+            const result = await cartService.addProduct(productId, quantity);
 
             return res.status(201).json(result);
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            next(error)
         }
     }
 
-    async updateQuantity(req, res) {
+    async updateItem(req, res, next) {
         try {
+            const { id } = req.user
             const { productId } = req.params;
             const { quantity } = req.body;
 
-            const result = await service.updateQuantity(productId, quantity);
+            const result = await cartService.updateItem(id, productId, quantity);
 
-            return res.json(result);
+            return res.status(200).json(result);
         } catch (error) {
-            console.log(error)
-            return res.status(400).json({ message: error.message});
+            next(error)
         }
     }
 
-    async removeProduct(req, res) {
+    async removeProduct(req, res, next) {
         try {
+            const { id } = req.user
             const { productId } = req.params;
 
-            const result = await service.removeProduct(productId);
+            const result = await cartService.removeProduct(id, productId);
 
-            return res.json({ message: 'Item removido', result});
+            return res.json({ message: 'Item removido', result });
         } catch (error) {
-            return res.status(400).json({ message: error.message});
+            next(error)
         }
     }
 }

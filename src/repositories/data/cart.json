@@ -1,0 +1,28 @@
+[
+  {
+    "id": "c9b1a670-7398-42b0-8646-02c235068cc4",
+    "userId": "64dc38b1-ddbe-4025-a15a-70080c1f21a0",
+    "items": [
+      {
+        "productId": "731f86db-3fc1-4507-a2b2-fbed135fbc39",
+        "quantity": 2,
+        "unitPrice": 49.9
+      },
+      {
+        "productId": "9a3a3b48-2c1d-4718-b2d5-d69633aa80af",
+        "quantity": 3,
+        "unitPrice": 21.9
+      },
+      {
+        "productId": "15b74c81-6f4c-457b-af24-c3a4b2e5c24b",
+        "quantity": 8,
+        "unitPrice": 43.9
+      }
+    ]
+  },
+  {
+    "id": "d6421fa6-08e7-4bfb-af44-a5a00f779eb5",
+    "userId": "aefdd775-2ca1-47e1-955a-ecc581821c8f",
+    "items": []
+  }
+]

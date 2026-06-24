@@ -1,13 +1,14 @@
 import { Router } from "express";
 import { CartController } from "../controllers/cartController.js";
+import { authorizationRoles } from "../middleware/auth.js";
 
 const router = Router();
 const cartController = new CartController();
 
 router
-    .get('/', cartController.getCart)
+    .get('/', cartController.getUserCart)
     .post('/', cartController.addProduct)
-    .patch('/:productId', cartController.updateQuantity)
-    .delete('/:productId', cartController.removeProduct);
+    .patch('/items/:productId', cartController.updateItem)
+    .delete('/items/:productId', cartController.removeProduct);
 
 export default router

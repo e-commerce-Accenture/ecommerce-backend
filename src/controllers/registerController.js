@@ -1,9 +1,11 @@
+import { CartRepository } from "../repositories/cartRepository.js";
 import { UserRepository } from "../repositories/userRepository.js";
 import { RegisterService } from "../services/registerService.js";
 import { UserService } from "../services/userService.js";
 
-const repository = new UserRepository();
-const registerService = new RegisterService(repository);
+const userRepository = new UserRepository();
+const cartRepository = new CartRepository()
+const registerService = new RegisterService(userRepository, cartRepository);
 
 export class RegisterController {
     async register(req, res) {
