@@ -61,5 +61,12 @@
     "email": "ansaad@email.com",
     "passwordHash": "$2b$10$KMHb.baupqk4J1FbzB.ZMeH.1xoUO2jPV9yLh6fRj7U4HCl3ZAF62",
     "role": "client"
+  },
+  {
+    "id": "3ef1bb45-73c4-4a90-acaa-1cc96f67f9e3",
+    "name": "Ana",
+    "email": "ansaadd@email.com",
+    "passwordHash": "$2b$10$gKOYTtEhAEt8kBCKfnh/nOrpaTnhH2VX11XqlxMWnNcwpn/YUVEJG",
+    "role": "client"
   }
 ]
