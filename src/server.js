@@ -1,11 +1,11 @@
 import cors from 'cors';
 import express from 'express';
 import 'dotenv/config';
-import cartRouter from './routes/cart.js';
 import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
-import errorHandler from './middleware/errorHandler.js';
+import cartRouter from './routes/cartRouter.js';
 import AIRouter from './routes/AIRouter.js';
+import errorHandler from './middleware/errorHandler.js';
 import registerRouter from './routes/registerRouter.js'
 import { authMiddleware } from './middleware/auth.js';
 
