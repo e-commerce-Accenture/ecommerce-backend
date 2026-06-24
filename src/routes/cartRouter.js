@@ -5,7 +5,6 @@ const router = Router();
 const cartController = new CartController();
 
 router
-
     .get('/', cartController.getCart)
     .post('/', cartController.addProduct)
     .patch('/:productId', cartController.updateQuantity)

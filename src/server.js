@@ -5,6 +5,7 @@ import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
 import cartRouter from './routes/cartRouter.js';
 import AIRouter from './routes/AIRouter.js';
+import categoryRouter from './routes/categoryRouter.js';
 import errorHandler from './middleware/errorHandler.js';
 import registerRouter from './routes/registerRouter.js'
 import profileRouter from './routes/profileRouter.js'
@@ -20,6 +21,7 @@ app.use(authMiddleware);
 app.use("/api/users", userRouter);
 app.use('/api/profile', profileRouter)
 app.use("/api/cart", cartRouter);
+app.use("/api/categories", categoryRouter);
 app.use('/api/ai', AIRouter)
 app.use(errorHandler);
 
