@@ -13,9 +13,9 @@ export class AuthenticateService {
     
             if(!user) throw new UserNotFound(`User with ${email} not found.`);
 
-            const passwordIsMatch = bcrypt.compare(password, user.passwordHash);
+            const passwordIsMatch = await bcrypt.compare(password, user.passwordHash);
 
-            if(!passwordIsMatch) throw new InvalidCredentials();
+            if(!passwordIsMatch) throw new InvalidCredentials("Invalid credentials");
 
             const token = generateToken(user)
 
