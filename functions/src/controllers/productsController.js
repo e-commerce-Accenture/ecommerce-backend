@@ -71,7 +71,7 @@ function deletarProduto(req, res) {
 function reativarProduto(req, res) {
     try {
 
-        const produtoReativado = productsService.reativar(req.params.id, req.body.name);
+        const produtoReativado = productsService.reativar(req.params.id, req.body.nome);
 
         res.status(200).json(produtoReativado);
     } catch (error) {

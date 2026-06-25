@@ -3,9 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 import { UserAlreadyExists } from "../utils/exceptions.js";
 
 export class RegisterService {
-    constructor(userRepository, cartRepository) {
+    constructor(userRepository, cartRepository, profileRepository) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
+        this.profileRepository = profileRepository;
     }
 
     async create(name, email, password) {
@@ -27,6 +28,7 @@ export class RegisterService {
             });
 
             await this.#createCart(newUser.id)
+            await this.#createProfile(newUser.id)
 
             const { passwordHash, ...user } = newUser;
 
@@ -36,10 +38,25 @@ export class RegisterService {
         }
     }
 
-    async #createCart(userId){
+    async #createCart(userId) {
         const cart = await this.cartRepository.create({
             id: uuidv4(),
             userId: userId
+        })
+    }
+
+    async #createProfile(userId) {
+        const profile = await this.profileRepository.create({
+            id: uuidv4(),
+            userId: userId,
+            phone: "",
+            address: {
+                cep: "",
+                street: "",
+                number: "",
+                city: "",
+                state: ""
+            }
         })
     }
 }
