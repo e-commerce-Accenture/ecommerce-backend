@@ -1,5 +1,6 @@
 import messages from '../utils/messages.js';
 import { BusinessException, ForbiddenException } from '../utils/exceptions.js';
+import { ZodError } from 'zod';
 
 const errorHandler = (err, req, res, next) => {
     // erro que vem de uma regra de negocio(email duplo, não enctrd, etc.)
@@ -14,6 +15,14 @@ const errorHandler = (err, req, res, next) => {
         return res.status(err.statusCode).json({
             error: err.name,
             message: err.message
+        })
+    }
+
+    if (err instanceof ZodError) {
+        return res.status(400).json({
+            error: err.name,
+            message:"Invalid data",
+            fields: err.flatten().fieldErrors
         })
     }
 

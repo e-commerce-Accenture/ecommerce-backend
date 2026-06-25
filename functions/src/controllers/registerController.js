@@ -8,15 +8,15 @@ const cartRepository = new CartRepository()
 const registerService = new RegisterService(userRepository, cartRepository);
 
 export class RegisterController {
-    async register(req, res) {
-        const { name, email, password } = req.body;
+    async register(req, res, next) {
+        const { name, email, password } = req.validated.body;
 
         try {
             const response = await registerService.create(name, email, password);
 
             return res.status(201).json(response)
         } catch (error) {
-            res.status(500).json({ error: error.message })
+            next(error)
         }
     }
 }

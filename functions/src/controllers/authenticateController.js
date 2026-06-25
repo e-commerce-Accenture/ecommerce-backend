@@ -6,7 +6,7 @@ const service = new AuthenticateService(repository);
 
 export class AuthenticateController {
     async signIn(req, res, next) {
-        const { email, password } = req.body;
+        const { email, password } = req.validated.body;
 
         try {
             const response = await service.authenticate(email, password);

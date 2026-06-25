@@ -6,17 +6,17 @@ const userService = new UserService(repository);
 
 export class UserController {
 
-    async getUsers(_, res) {
+    async getUsers(_, res, next) {
         try {
             const response = await userService.findAll();
             return res.status(200).json(response)
 
         } catch (error) {
-            return res.status(500)
+            next(error)
         }
     }
 
-    async getUserById(req, res) {
+    async getUserById(req, res, next) {
         const { id } = req.params
 
         try {
@@ -24,32 +24,32 @@ export class UserController {
 
             return res.status(200).json(response);
         } catch (error) {
-            return res.status(500).json({ error: error.message })
+            next(error)
         }
     }
 
-    async updateUser(req, res) {
+    async updateUser(req, res, next) {
         const { id } = req.params;
-        const { name, email } = req.body
+        const { name, email } = req.validated.body
 
         try {
             const response = await userService.update(id, { name, email })
 
             return res.status(200).json(response)
         } catch (error) {
-            return res.status(500).json({ error: error.message })
+            next(error)
         }
 
     }
 
-    async deleteUser(req, res) {
+    async deleteUser(req, res, next) {
         const { id } = req.params
 
         try {
             await userService.delete(id)
             return res.status(204).send()
         } catch (error) {
-            return res.status(500).json({error: error.message})
+            next(error)
         }
     }
 }

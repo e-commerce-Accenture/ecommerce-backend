@@ -19,7 +19,7 @@ export class CartService {
 
             if(cartItem) {
                 return this.cartRepository.updateCart(productId, {
-                    quantity: cartItem.quantity + quantity
+                    quantity: quantity
                 });
             }
 

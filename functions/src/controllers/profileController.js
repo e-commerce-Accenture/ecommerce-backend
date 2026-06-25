@@ -20,7 +20,7 @@ export class ProfileController {
 
     async updateProfile(req, res, next) {
         const { id } = req.user;
-        const { name, email } = req.body;
+        const { name, email } = req.validated.body;
 
         try {
             const response = await profileService.updateProfile(id, { name, email });

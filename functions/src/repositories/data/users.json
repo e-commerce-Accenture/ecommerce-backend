@@ -1,22 +1,22 @@
 [
   {
     "id": "64dc38b1-ddbe-4025-a15a-70080c1f21a0",
-    "name": "Admin",
+    "name": "admin",
     "email": "admin@nextgen.com",
     "passwordHash": "$2b$10$YmP2ThYgAPFJjaeTLt/0KOZJK/T/47.WTSpVq3aSg2aEv2xp68C/W",
     "role": "admin"
   },
   {
     "id": "36eaa467-ee92-4cc6-b144-96a9b25730d5",
-    "name": "Joe",
-    "email": "emnadasfil@gmaidl.com",
+    "name": "Jason",
+    "email": "anadad@emdail.com",
     "passwordHash": "$2b$10$gTlQ.gtli6KqlEVTwLIWjOIamk8qf26CrUUpCcjmBELcyPMPA/BTy",
     "role": "client"
   },
   {
     "id": "bef70aae-2910-41ff-abe6-0946f4eec9a0",
-    "name": "Joe",
-    "email": "emnadasfdil@gmaidl.com",
+    "name": "Test",
+    "email": "test23@emdail.com",
     "passwordHash": "$2b$10$0oEVPFsinYHSZw9gItSf/uZUX25U8Bmsi77MT9JEJpbv8TZn8SqRy",
     "role": "client"
   },
@@ -39,6 +39,20 @@
     "name": "Cart",
     "email": "cart@gmail.com",
     "passwordHash": "$2b$10$3s9FCOu59BFFQ180oHrxvupeZ0QboW9EKBp0XkndsM2CbtgX19gP2",
+    "role": "client"
+  },
+  {
+    "id": "59f04367-3c93-4d40-86a2-402f3663900d",
+    "name": "Fire2",
+    "email": "fire2@gmail.com",
+    "passwordHash": "$2b$10$bVEfBH.FrvevNTfkLZ0lQOHwBBPpBrsYyBtVpNUsmlxYOjuC0iUhq",
+    "role": "client"
+  },
+  {
+    "id": "c10c6de7-3213-406f-be31-b5dca14668c0",
+    "name": "fire",
+    "email": "fdire@gmail.com",
+    "passwordHash": "$2b$10$IESzY/Htj.EQH02J5e3wROCbDZ7fcYc8cbrf0OiXyaIaWMKANXXbS",
     "role": "client"
   }
 ]
