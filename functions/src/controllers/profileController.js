@@ -1,8 +1,10 @@
+import { ProfileRepository } from "../repositories/profileRepository.js";
 import { UserRepository } from "../repositories/userRepository.js";
 import { ProfileService } from "../services/profileService.js";
 
-const repository = new UserRepository();
-const profileService = new ProfileService(repository);
+const userRepository = new UserRepository();
+const profileRepository = new ProfileRepository();
+const profileService = new ProfileService(userRepository, profileRepository);
 
 export class ProfileController {
 

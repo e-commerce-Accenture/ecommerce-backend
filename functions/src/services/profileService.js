@@ -1,14 +1,23 @@
 export class ProfileService {
-    constructor(userRepository) {
+    constructor(userRepository, profileRepository) {
         this.userRepository = userRepository;
+        this.profileRepository = profileRepository;
     }
 
     async getProfile(id) {
         try {
-            const user = await this.userRepository.findById(id);
-            const { passwordHash, ...profile } = user;
+            const findedUser = await this.userRepository.findById(id);
+            const findedProfile = await this.profileRepository.findProfileByUserId(id)
 
-            return profile;
+            const { passwordHash, ...user } = findedUser;
+            const {userId, ...profile} = findedProfile;
+
+            const userProfile = {
+                ...user,
+                ...profile
+            }
+
+            return userProfile;
 
         } catch (error) {
             throw error;

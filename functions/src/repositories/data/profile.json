@@ -1,0 +1,15 @@
+[
+    {
+        "id": "fd2cb06f-5c47-4d4f-8da3-c1cf6cbcf6cf",
+        "userId": "64dc38b1-ddbe-4025-a15a-70080c1f21a0",
+        "phone": "99999999999",
+        "address": {
+            "cep": "5210032",
+            "street": "rua exemplo tal",
+            "number": "200",
+            "neighborhood": "bairro exemplo",
+            "city": "Recife",
+            "state": "Pernambuco"
+        }
+    }
+]
