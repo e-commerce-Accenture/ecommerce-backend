@@ -27,11 +27,23 @@ export class ProfileController {
         try {
             const response = await profileService.updateProfile(
                 id,
-                { name, email},
+                { name, email },
                 { phone, cep, street, number, neighborhood, city, state }
             );
 
             res.status(200).json(response)
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async updatePassword(req, res, next) {
+        const { id } = req.user;
+        const { password } = req.validated.body;
+
+        try {
+            await profileService.updatePassword(id, password);
+            res.status(204).send();
         } catch (error) {
             next(error);
         }

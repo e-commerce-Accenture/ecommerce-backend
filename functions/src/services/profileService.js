@@ -1,3 +1,6 @@
+import bcrypt from "bcryptjs";
+import { UserNotFound } from "../utils/exceptions.js";
+
 export class ProfileService {
     constructor(userRepository, profileRepository) {
         this.userRepository = userRepository;
@@ -45,5 +48,15 @@ export class ProfileService {
         } catch (error) {
             throw error;
         }
+    }
+
+    async updatePassword(id, password){
+        const user = await this.userRepository.findById(id);
+
+        if(!user) throw new UserNotFound(`User with id {id} not found`);
+
+        const newPassword = await bcrypt.hash(password, 10);
+
+        await this.userRepository.updatePassword(user.id, newPassword);
     }
 }
