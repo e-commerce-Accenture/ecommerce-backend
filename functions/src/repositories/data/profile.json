@@ -23,5 +23,17 @@
       "city": "Recife",
       "state": "PE"
     }
+  },
+  {
+    "id": "f704317a-d106-40f3-9411-0ed0d005fdd5",
+    "userId": "bfc21db5-42bd-4893-aac8-720b19afba92",
+    "phone": "",
+    "address": {
+      "cep": "",
+      "street": "",
+      "number": "",
+      "city": "",
+      "state": ""
+    }
   }
 ]
