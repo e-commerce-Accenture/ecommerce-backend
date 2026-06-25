@@ -1,8 +1,10 @@
+import { ProfileRepository } from "../repositories/profileRepository.js";
 import { UserRepository } from "../repositories/userRepository.js";
 import { ProfileService } from "../services/profileService.js";
 
-const repository = new UserRepository();
-const profileService = new ProfileService(repository);
+const userRepository = new UserRepository();
+const profileRepository = new ProfileRepository();
+const profileService = new ProfileService(userRepository, profileRepository);
 
 export class ProfileController {
 
@@ -20,10 +22,14 @@ export class ProfileController {
 
     async updateProfile(req, res, next) {
         const { id } = req.user;
-        const { name, email } = req.validated.body;
+        const { name, email, phone, cep, street, number, neighborhood, city, state } = req.validated.body;
 
         try {
-            const response = await profileService.updateProfile(id, { name, email });
+            const response = await profileService.updateProfile(
+                id,
+                { name, email},
+                { phone, cep, street, number, neighborhood, city, state }
+            );
 
             res.status(200).json(response)
         } catch (error) {
