@@ -7,13 +7,6 @@
     "role": "admin"
   },
   {
-    "id": "b6ee58ba-1fd3-4b66-84ac-8a75a7eadb2c",
-    "name": "Joe",
-    "email": "emnail@gmail.com",
-    "passwordHash": "$2b$10$0zQIOfc4U91P1lLaDr9az.cqcD6pWLbGdgSd9UWm8DkU.PtSQvp9q",
-    "role": "client"
-  },
-  {
     "id": "36eaa467-ee92-4cc6-b144-96a9b25730d5",
     "name": "Joe",
     "email": "emnadasfil@gmaidl.com",
@@ -35,10 +28,52 @@
     "role": "client"
   },
   {
-    "id": "ec0b42de-053f-4646-8972-6541e310c3dd",
+    "id": "9a7b2551-ffa7-477f-ae15-1594df4c86df",
+    "name": "João",
+    "email": "joao@teste.com",
+    "passwordHash": "$2b$10$jU3yaLoMht/43H88Y7PjEO63FLX0xYmdeS9y9t8o6o6yS0mN9Nf8S",
+    "role": "client"
+  },
+  {
+    "id": "9bfd1768-7787-4cc9-9bae-449581333860",
     "name": "Ana",
     "email": "ana@email.com",
-    "passwordHash": "$2b$10$JsVcsDE/bsZsezXh1LIqVuaGVqHCP3pxpuUQLhKPy6R3kJLtXfpLa",
+    "passwordHash": "$2b$10$hO8nKP.CQtjpBhOT5QEe4eXQQBT1wx6aJPNuxzz5Cnmc2.b6DqEPy",
+    "role": "client"
+  },
+  {
+    "id": "d946d5b2-7ee8-4edb-a580-8ca01fbbfe7a",
+    "name": "Ana Belle",
+    "email": "anabelle@email.com",
+    "passwordHash": "$2b$10$U7bQZyKP1RZ5xELSapREu.z87/lji23SYd8SrAq9RbmRajItkG752",
+    "role": "client"
+  },
+  {
+    "id": "43d83d8f-32ba-4bd8-8beb-da1352e3de16",
+    "name": "Ana",
+    "email": "ansaa@email.com",
+    "passwordHash": "$2b$10$ELeB5D9KKDaoWsru8golIOO4C006nnlYPRBLWTCVS2hImFwacRpYe",
+    "role": "client"
+  },
+  {
+    "id": "956606c1-630d-49ba-af9f-b3a10de24341",
+    "name": "Ana",
+    "email": "ansaad@email.com",
+    "passwordHash": "$2b$10$KMHb.baupqk4J1FbzB.ZMeH.1xoUO2jPV9yLh6fRj7U4HCl3ZAF62",
+    "role": "client"
+  },
+  {
+    "id": "3ef1bb45-73c4-4a90-acaa-1cc96f67f9e3",
+    "name": "Ana",
+    "email": "ansaadd@email.com",
+    "passwordHash": "$2b$10$gKOYTtEhAEt8kBCKfnh/nOrpaTnhH2VX11XqlxMWnNcwpn/YUVEJG",
+    "role": "client"
+  },
+  {
+    "id": "aefdd775-2ca1-47e1-955a-ecc581821c8f",
+    "name": "Cart",
+    "email": "cart@gmail.com",
+    "passwordHash": "$2b$10$3s9FCOu59BFFQ180oHrxvupeZ0QboW9EKBp0XkndsM2CbtgX19gP2",
     "role": "client"
   }
 ]

@@ -1,61 +1,45 @@
 import bcrypt from "bcryptjs";
-import { v4 as uuidv4 } from "uuid";
+import { EmailAlreadyExists, UserNotFound } from "../utils/exceptions.js";
 
 export class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
 
-    async create(name, email, password) {
-        try {
-            const isExists = await this.userRepository.findByEmail(email);
-
-            if (isExists) {
-                throw new Error('User already exists');
-            }
-
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            const newUser = await this.userRepository.create({
-                id: uuidv4(),
-                name: name,
-                email: email,
-                passwordHash: hashedPassword,
-                role: 'client'
-            });
-
-            const { passwordHash, ...user } = newUser;
-
-            return user;
-        } catch (error) {
-            throw error;
-        }
-    }
-
     async findAll() {
         const users = await this.userRepository.findAll();
+        const result = users.map(({passwordHash, ...user}) => user)
 
-        return users;
+        return result;
     }
 
     async findById(id) {
-        const finded = await this.userRepository.findById(id);
-
-        if(!finded){
-            return [];
+        try {
+            const finded = await this.userRepository.findById(id);
+    
+            if(!finded){
+                throw new UserNotFound(`User with id ${id} not found.`);
+            }
+    
+            const { passwordHash, ...user } = finded;
+    
+            return user;
+            
+        } catch (error) {
+            throw error;
         }
-
-        const { passwordHash, ...user } = finded;
-
-        return user;
     }
 
     async update(id, data){
         try {
             const isExist = await this.userRepository.findById(id);
     
-            if(!isExist) throw new Error('User not found');
-    
+            if(!isExist) throw new UserNotFound(`User with id ${id} not found.`);
+
+            const emailExist = await this.userRepository.findByEmail(data.email);
+
+            if(emailExist && data.email == emailExist.email) throw new EmailAlreadyExists(`Email ${data.email} already exists`); 
+
             const updatedUser = await this.userRepository.update(id, data);
             
             const {passwordHash, ...user} = updatedUser;
@@ -68,10 +52,15 @@ export class UserService {
     }
 
     async delete(id){
-        const isExist = await this.userRepository.findById(id);
-
-        if(!isExist) throw new Error('User not found');
-
-        await this.userRepository.deleteById(id);
+        try {
+            const isExist = await this.userRepository.findById(id);
+    
+            if(!isExist) throw new UserNotFound(`User with id ${id} not found.`);
+    
+            await this.userRepository.deleteById(id);
+            
+        } catch (error) {
+            throw error;
+        }
     }
 }
