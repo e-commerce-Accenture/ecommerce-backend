@@ -2,22 +2,41 @@
   {
     "id": "1",
     "name": "Camiseta Preta",
-    "price": 49.90,
+    "price": 49.9,
     "description": "Camiseta básica preta 100% algodão",
-    "stock": 50
+    "stock": 50,
+    "ativo": true
   },
   {
     "id": "2",
     "name": "Tênis Branco",
-    "price": 199.90,
+    "price": 199.9,
     "description": "Tênis casual branco confortável",
-    "stock": 30
+    "stock": 30,
+    "ativo": true
   },
   {
     "id": "3",
     "name": "Boné Azul",
-    "price": 39.90,
+    "price": 39.9,
     "description": "Boné azul aba reta ajustável",
-    "stock": 100
+    "stock": 100,
+    "ativo": true
+  },
+  {
+    "id": "31",
+    "name": "Calça Jeans",
+    "price": 129.9,
+    "description": "Calça jeans azul reta",
+    "stock": 20,
+    "ativo": true
+  },
+  {
+    "id": "32",
+    "name": "Mouse Gamer",
+    "price": 150,
+    "description": "Mouse óptico rgb com 6000 DPI",
+    "stock": 25,
+    "ativo": true
   }
 ]
