@@ -11,29 +11,5 @@
       "city": "Recife",
       "state": "PB"
     }
-  },
-  {
-    "id": "9aa42020-525b-4180-8497-513fc52452c5",
-    "userId": "addd2cde-dd1f-4a52-960e-8cf0b0ad4103",
-    "phone": "99999999999",
-    "address": {
-      "cep": "",
-      "street": "",
-      "number": "",
-      "city": "Recife",
-      "state": "PE"
-    }
-  },
-  {
-    "id": "f704317a-d106-40f3-9411-0ed0d005fdd5",
-    "userId": "bfc21db5-42bd-4893-aac8-720b19afba92",
-    "phone": "",
-    "address": {
-      "cep": "",
-      "street": "",
-      "number": "",
-      "city": "",
-      "state": ""
-    }
   }
 ]
