@@ -49,7 +49,7 @@ export class UserRepository {
 
         fs.writeFileSync(file, usersUpdated);
 
-        return users[index]
+        return users[index];
      }
 
     findByEmail(email) {
