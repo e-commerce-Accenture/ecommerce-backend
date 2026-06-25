@@ -35,7 +35,7 @@ export class UserRepository {
         return JSON.parse(fs.readFileSync(file, 'utf-8'));
     }
 
-    update(id, data){
+    update(id, data) {
         const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
         const index = users.findIndex(u => u.id == id);
 
@@ -50,7 +50,21 @@ export class UserRepository {
         fs.writeFileSync(file, usersUpdated);
 
         return users[index];
-     }
+    }
+
+    updatePassword(id, password) {
+        const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const index = users.findIndex(u => u.id == id);
+
+        users[index] = {
+            ...users[index],
+            ...(password && { passwordHash: password })
+        };
+
+        const usersUpdated = JSON.stringify(users, null, 2);
+
+        fs.writeFileSync(file, usersUpdated);
+    }
 
     findByEmail(email) {
         const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
@@ -59,7 +73,7 @@ export class UserRepository {
         return finded;
     }
 
-    deleteById(id){
+    deleteById(id) {
         const users = JSON.parse(fs.readFileSync(file, 'utf-8'));
         const index = users.findIndex(u => u.id == id);
 

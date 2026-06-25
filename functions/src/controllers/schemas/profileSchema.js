@@ -18,3 +18,9 @@ export const updateProfileSchema = z.object({
         state: z.string().optional()
     }).strict()
 });
+
+export const updatePassowrdSchema = z.object({
+    body: z.object({
+        password: z.string({ required_error: "password is required"})
+    })
+})
