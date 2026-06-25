@@ -4,15 +4,17 @@ const file = "./src/repositories/data/profile.json"
 
 export class ProfileRepository {
     create(data) {
+        
         const newProfile = {
             id: data.id,
             userId: data.userId,
+            phone: data.phone,
             address: {
-                cep: data.cep,
-                street: data.street,
-                number: data.number,
-                city: data.city,
-                state: data.state
+                cep: data.address?.cep || "",
+                street: data.address?.street || "",
+                number: data.address?.number || "",
+                city: data.address?.city || "",
+                state: data.address?.state || ""
             }
         };
 
@@ -22,7 +24,7 @@ export class ProfileRepository {
 
         const updateProfile = JSON.stringify(profiles, null, 2);
 
-        fs.writeFileSync(file, profiles)
+        fs.writeFileSync(file, updateProfile)
 
         return newProfile;
     }
@@ -41,13 +43,17 @@ export class ProfileRepository {
         profiles[index] = {
             ...profiles[index],
             ...(data.phone && { phone: data.phone }),
-            ...(data.email && { email: data.email }),
-            ...(data.address && {
+            ...((data.cep || data.street || data.number || data.neighborhood || data.city || data.state) ? {
                 address: {
-                    ...profiles[index].address,
-                    ...data.address
+                    ...(profiles[index].address || {}),
+                    ...(data.cep && { cep: data.cep }),
+                    ...(data.street && { street: data.street }),
+                    ...(data.number && { number: data.number }),
+                    ...(data.neighborhood && { neighborhood: data.neighborhood }),
+                    ...(data.city && { city: data.city }),
+                    ...(data.state && { state: data.state }),
                 }
-            })
+            } : {})
         };
 
         const profilesUpdated = JSON.stringify(profiles, null, 2);

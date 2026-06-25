@@ -24,16 +24,24 @@ export class ProfileService {
         }
     }
 
-    async updateProfile(id, data) {
+    async updateProfile(id, userData, addressData) {
         try {
-            const emailExist = await this.userRepository.findByEmail(data.email);
-            if (emailExist && data.email == emailExist.email) throw new EmailAlreadyExists(`Email ${data.email} already exists`);
-
-            const updatedUser = await this.userRepository.update(id, data);
-
+            const emailExist = await this.userRepository.findByEmail(userData.email);
+            if (emailExist && userData.email == emailExist.email) throw new EmailAlreadyExists(`Email ${data.email} already exists`);
+            
+            const updatedUser = await this.userRepository.update(id, userData);
+            const updatedProfile = await this.profileRepository.update(id, addressData);
+            
             const { passwordHash, ...user } = updatedUser;
+            const {userId, ...profile} = updatedProfile;
 
-            return user;
+            const userProfileUpdated = {
+                ...user,
+                ...profile
+            };
+
+            return userProfileUpdated;
+
         } catch (error) {
             throw error;
         }
