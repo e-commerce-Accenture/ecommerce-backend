@@ -15,14 +15,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/auth", authRouter);
-app.use("/api/users/register", registerRouter)
+app.use("/auth", authRouter);
+app.use("/users/register", registerRouter)
 app.use(authMiddleware);
-app.use("/api/users", userRouter);
-app.use('/api/profile', profileRouter)
-app.use("/api/cart", cartRouter);
-app.use("/api/categories", categoryRouter);
-app.use('/api/ai', AIRouter)
+app.use("/users", userRouter);
+app.use('/profile', profileRouter)
+app.use("/cart", cartRouter);
+app.use("/categories", categoryRouter);
+app.use('/ai', AIRouter)
 app.use(errorHandler);
 
 export default app;
