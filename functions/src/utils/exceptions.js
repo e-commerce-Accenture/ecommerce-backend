@@ -14,6 +14,14 @@ class UserAlreadyExists extends BusinessException {
     }
 }
 
+class ProductAlreadyExists extends BusinessException {
+    constructor(message) {
+        super(message, 409);
+        this.name = 'ProductAlreadyExists';
+    }
+}
+
+
 class EmailAlreadyExists extends BusinessException {
     constructor(message) {
         super(message, 409);
@@ -40,6 +48,13 @@ class UserNotFound extends NotFoundException {
     constructor(message) {
         super(message, 404);
         this.name = 'UserNotFound';
+    }
+}
+
+class ProductNotFound extends NotFoundException {
+    constructor(message) {
+        super(message, 404);
+        this.name = 'ProductNotFound';
     }
 }
 
@@ -98,7 +113,9 @@ export {
     NotFoundException,
     UserNotFound,
     CategoryNotFound,
+    ProductNotFound,
     UserAlreadyExists,
+    ProductAlreadyExists,
     EmailAlreadyExists,
     CategoryAlreadyExists,
     InvalidCredentials,

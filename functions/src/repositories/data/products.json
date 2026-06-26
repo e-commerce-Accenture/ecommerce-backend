@@ -1,62 +1,97 @@
 [
   {
-    "id": 1,
-    "nome": "Galaxy S22 Ultra",
-    "precoAtual": 32999,
-    "precoOriginal": 74999,
-    "desconto": 56,
-    "imagem": "ImgGalaxyS22",
-    "categoria": "Samsung",
-    "estoque": 15,
-    "marca": "Samsung",
-    "ativo": true
+    "id": "a1b2c3d4-e5f6-7890-ab12-cd34ef567890",
+    "name": "Galaxy S22 Ultra",
+    "currentPrice": 32999,
+    "originalPrice": 74999,
+    "discount": 56,
+    "image": "ImgGalaxyS22",
+    "categoryId": "361bb008-4f45-487a-b1f0-0598911ab267",
+    "stock": 15,
+    "brand": "Samsung",
+    "active": true,
+    "attributes": [
+      { "title": "RAM", "paragraph": "12GB" },
+      { "title": "Storage", "paragraph": "256GB" },
+      { "title": "Processor", "paragraph": "Snapdragon 8 Gen 1" },
+      { "title": "Battery", "paragraph": "5000mAh" },
+      { "title": "Display", "paragraph": "6.8 inches Dynamic AMOLED" }
+    ]
   },
   {
-    "id": 2,
-    "nome": "iPhone 14 Pro Max",
-    "precoAtual": 45999,
-    "precoOriginal": 79999,
-    "desconto": 43,
-    "imagem": "ImgIphone14ProMax",
-    "categoria": "Apple",
-    "estoque": 10,
-    "marca": "Apple",
-    "ativo": true
+    "id": "b2c3d4e5-f6a7-8901-bc23-de45fa678901",
+    "name": "iPhone 14 Pro Max",
+    "currentPrice": 45999,
+    "originalPrice": 79999,
+    "discount": 43,
+    "image": "ImgIphone14ProMax",
+    "categoryId": "361bb008-4f45-487a-b1f0-0598911ab267",
+    "stock": 10,
+    "brand": "Apple",
+    "active": true,
+    "attributes": [
+      { "title": "RAM", "paragraph": "6GB" },
+      { "title": "Storage", "paragraph": "256GB" },
+      { "title": "Processor", "paragraph": "Apple A16 Bionic" },
+      { "title": "Battery", "paragraph": "4323mAh" },
+      { "title": "Display", "paragraph": "6.7 inches Super Retina XDR" }
+    ]
   },
   {
-    "id": 3,
-    "nome": "Motorola Edge 30",
-    "precoAtual": 18999,
-    "precoOriginal": 34999,
-    "desconto": 46,
-    "imagem": "ImgMotorolaEdge30",
-    "categoria": "Motorola",
-    "estoque": 20,
-    "marca": "Motorola",
-    "ativo": true
+    "id": "c3d4e5f6-a7b8-9012-cd34-ef56ab789012",
+    "name": "Motorola Edge 30",
+    "currentPrice": 18999,
+    "originalPrice": 34999,
+    "discount": 46,
+    "image": "ImgMotorolaEdge30",
+    "categoryId": "361bb008-4f45-487a-b1f0-0598911ab267",
+    "stock": 20,
+    "brand": "Motorola",
+    "active": true,
+    "attributes": [
+      { "title": "RAM", "paragraph": "8GB" },
+      { "title": "Storage", "paragraph": "128GB" },
+      { "title": "Processor", "paragraph": "Snapdragon 778G+" },
+      { "title": "Battery", "paragraph": "4020mAh" },
+      { "title": "Display", "paragraph": "6.5 inches pOLED 144Hz" }
+    ]
   },
   {
-    "id": 4,
-    "nome": "Xiaomi Redmi Note 12",
-    "precoAtual": 12999,
-    "precoOriginal": 24999,
-    "desconto": 48,
-    "imagem": "ImgRedmiNote12",
-    "categoria": "Xiaomi",
-    "estoque": 25,
-    "marca": "Xiaomi",
-    "ativo": true
+    "id": "d4e5f6a7-b8c9-0123-de45-fa67bc890123",
+    "name": "Xiaomi Redmi Note 12",
+    "currentPrice": 12999,
+    "originalPrice": 24999,
+    "discount": 48,
+    "image": "ImgRedmiNote12",
+    "categoryId": "361bb008-4f45-487a-b1f0-0598911ab267",
+    "stock": 25,
+    "brand": "Xiaomi",
+    "active": true,
+    "attributes": [
+      { "title": "RAM", "paragraph": "6GB" },
+      { "title": "Storage", "paragraph": "128GB" },
+      { "title": "Processor", "paragraph": "Snapdragon 685" },
+      { "title": "Battery", "paragraph": "5000mAh" },
+      { "title": "Display", "paragraph": "6.67 inches AMOLED 120Hz" }
+    ]
   },
   {
-    "id": 5,
-    "nome": "Galaxy A54",
-    "precoAtual": 16999,
-    "precoOriginal": 29999,
-    "desconto": 43,
-    "imagem": "ImgGalaxyA54",
-    "categoria": "Samsung",
-    "estoque": 18,
-    "marca": "Samsung",
-    "ativo": true
+    "id": "e5f6a7b8-c9d0-1234-ef56-ab78cd901234",
+    "name": "Galaxy A54",
+    "currentPrice": 16999,
+    "originalPrice": 29999,
+    "discount": 43,
+    "image": "ImgGalaxyA54",
+    "categoryId": "361bb008-4f45-487a-b1f0-0598911ab267",
+    "stock": 18,
+    "brand": "Samsung",
+    "active": true,
+    "attributes": [
+      { "title": "RAM", "paragraph": "8GB" },
+      { "title": "Storage", "paragraph": "256GB" },
+      { "title": "Processor", "paragraph": "Exynos 1380" },
+      { "title": "Battery", "paragraph": "5000mAh" },
+      { "title": "Display", "paragraph": "6.4 inches Super AMOLED 120Hz" }
+    ]
   }
 ]

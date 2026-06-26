@@ -12,6 +12,7 @@ import registerRouter from './routes/registerRouter.js'
 import profileRouter from './routes/profileRouter.js'
 import { authMiddleware } from './middleware/auth.js';
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use("/auth", authRouter);
 app.use("/users/register", registerRouter)
 app.use("/products", productRouter);
 app.use(authMiddleware);
+app.use("/products", productRouter);
 app.use("/users", userRouter);
 app.use('/profile', profileRouter)
 app.use("/cart", cartRouter);
