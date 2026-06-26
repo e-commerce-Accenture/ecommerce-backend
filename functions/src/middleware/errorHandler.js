@@ -3,7 +3,6 @@ import { BusinessException, ForbiddenException } from '../utils/exceptions.js';
 import { ZodError } from 'zod';
 
 const errorHandler = (err, req, res, next) => {
-    // erro que vem de uma regra de negocio(email duplo, não enctrd, etc.)
     if (err instanceof BusinessException) {
         return res.status(err.statusCode).json({
             error: err.name,
@@ -21,12 +20,11 @@ const errorHandler = (err, req, res, next) => {
     if (err instanceof ZodError) {
         return res.status(400).json({
             error: err.name,
-            message:"Invalid data",
+            message: "Invalid data",
             fields: err.flatten().fieldErrors
         })
     }
 
-    // Erro de bug, falha de rede, etc.
     console.error('Erro interno do servidor:', err);
     return res.status(500).json({
         error: 'InternalServerError',
