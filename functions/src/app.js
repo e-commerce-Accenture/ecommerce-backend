@@ -13,6 +13,7 @@ import registerRouter from './routes/registerRouter.js'
 import profileRouter from './routes/profileRouter.js'
 import { authMiddleware } from './middleware/auth.js';
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
