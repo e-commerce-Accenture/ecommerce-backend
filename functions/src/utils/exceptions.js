@@ -21,6 +21,12 @@ class ProductAlreadyExists extends BusinessException {
     }
 }
 
+class ItemCartAlreadyExists extends BusinessException {
+    constructor(message) {
+        super(message, 409);
+        this.name = 'ItemCartAlreadyExists';
+    }
+}
 
 class EmailAlreadyExists extends BusinessException {
     constructor(message) {
@@ -123,6 +129,7 @@ export {
     ProductNotFound,
     UserAlreadyExists,
     ProductAlreadyExists,
+    ItemCartAlreadyExists,
     EmailAlreadyExists,
     BannerNotFound,
     CategoryAlreadyExists,

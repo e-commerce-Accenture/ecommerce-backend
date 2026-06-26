@@ -35,6 +35,32 @@ export class CartRepository {
         return JSON.parse(fs.readFileSync(file, 'utf-8'));
     }
 
+    addItem(userId, data) {
+        const carts = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const cart = carts.find(c => c.userId === userId);
+
+        cart.items = [
+            ...cart.items,
+            {
+                ...(data.productId && { productId: data.productId }),
+                ...(data.unitPrice && { unitPrice: data.unitPrice }),
+                ...(data.quantity && { quantity: data.quantity })
+            }
+        ];
+
+        fs.writeFileSync(file, JSON.stringify(carts, null, 2));
+
+        return cart;
+    }
+
+    findCartProduct(userId, productId) {
+        const carts = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        const cart = carts.find(c => c.userId == userId);
+
+        const product = cart.items.find(p => p.productId === productId);
+        return product || null;
+    }
+
     updateItem(id, productId, quantity) {
         const carts = JSON.parse(fs.readFileSync(file, 'utf-8'));
         const cart = carts.find(c => c.id === id);

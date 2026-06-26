@@ -2,11 +2,13 @@ import { response, Router } from "express"
 import { CartRepository } from "../repositories/cartRepository.js";
 import { CartService } from "../services/cartService.js";
 import { UserRepository } from "../repositories/userRepository.js";
+import { ProductRepository } from "../repositories/productRepository.js";
 
 
 const cartRepository = new CartRepository();
+const productRepository = new ProductRepository();
 const userRepository = new UserRepository();
-const cartService = new CartService(cartRepository, userRepository);
+const cartService = new CartService(cartRepository, userRepository, productRepository);
 
 
 export class CartController {
@@ -25,8 +27,10 @@ export class CartController {
 
     async addProduct(req, res, next) {
         try {
+            const { id } = req.user;
+
             const { productId, quantity } = req.validated.body;
-            const result = await cartService.addProduct(productId, quantity);
+            const result = await cartService.addProduct(id, productId, quantity);
 
             return res.status(201).json(result);
         } catch (error) {
@@ -55,7 +59,7 @@ export class CartController {
 
             const result = await cartService.removeProduct(id, productId);
 
-            return res.json({ message: 'Item removido', result });
+            return res.status(200).send();
         } catch (error) {
             next(error)
         }

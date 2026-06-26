@@ -1,4 +1,4 @@
-import { UserNotFound } from "../utils/exceptions.js";
+import { ItemCartAlreadyExists, ProductNotFound, UserNotFound } from "../utils/exceptions.js";
 
 export class CartService {
     constructor(cartRepository, userRepository, productRepository) {
@@ -7,26 +7,26 @@ export class CartService {
         this.productRepository = productRepository;
     }
 
-    async addProduct (productId, quantity) {
+    async addProduct (userId, productId, quantity) {
     
             const product = this.productRepository.findById(productId);
 
             if(!product) {
-                throw new Error("Produto não encontrado")
+                throw new ProductNotFound(`Product with id ${productId} not found`);
             }
 
-            const cartItem = this.cartRepository.findByProduct(productId);
+            const cartItem = this.cartRepository.findByProductId(productId);
+            const productCart = this.cartRepository.findCartProduct(userId, product.id);
 
-            if(cartItem) {
-                return this.cartRepository.updateCart(productId, {
-                    quantity: quantity
-                });
+            if(productCart) {
+                throw new ItemCartAlreadyExists(`Item with id ${productCart.productId} already exists.`)
             }
 
-            return this.cartRepository.create({
+            return this.cartRepository.addItem(
+                userId,
+                {
                 productId,
-                name: product.name,
-                price: product.price,
+                unitPrice: product.currentPrice,
                 quantity
             });
     }
@@ -47,8 +47,10 @@ export class CartService {
 
     async updateItem(userId, productId, data) {
         const cart = this.cartRepository.findByUserId(userId);
+        
+        const itemUpdated = await this.cartRepository.updateItem(cart.id, productId, data);
 
-        return await this.cartRepository.updateItem(cart.id, productId, data)
+        return itemUpdated || [];
     }
 
     async removeProduct(userId, productId) {
