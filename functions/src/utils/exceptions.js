@@ -42,7 +42,6 @@ class CategoryAlreadyExists extends BusinessException {
     }
 }
 
-// recurso não encontrado
 class NotFoundException extends BusinessException {
     constructor(message) {
         super(message, 404);
@@ -85,28 +84,26 @@ class InvalidCredentials extends BusinessException {
     }
 }
 
-// não autenticado (sem token ou senha errada)
 class UnauthorizedException extends BusinessException {
     constructor(message) {
         super(message, 401);
         this.name = 'UnauthorizedException';
     }
 }
-// autenticado mas sem permissão
+
 class ForbiddenException extends BusinessException {
     constructor(message) {
         super(message, 403);
         this.name = 'ForbiddenException';
     }
 }
-// conflito (ex: email duplicado)
 class ConflictException extends BusinessException {
     constructor(message) {
         super(message, 409);
         this.name = 'ConflictException';
     }
 }
-// dados inválidos
+
 class BadRequestException extends BusinessException {
     constructor(message) {
         super(message, 400);
@@ -114,7 +111,7 @@ class BadRequestException extends BusinessException {
     }
 
 }
-// serviço externo indisponível ou falhando, tipo a IA caiu
+
 class ServiceUnavailableException extends BusinessException {
     constructor(message) {
         super(message, 503);

@@ -20,10 +20,7 @@ describe('CategoryService', () => {
         categoryService = new CategoryService(mockCategoryRepository);
     });
 
-    // CENÁRIO 1: Criar categoria com sucesso
-    
     it('Cria uma categoria com sucesso quando o nome não existe', async () => {
-        // Nome ainda não existe no banco
         mockCategoryRepository.findByName.mockResolvedValue(null);
         mockCategoryRepository.create.mockResolvedValue({
             id: 'cat-uuid',
@@ -38,10 +35,7 @@ describe('CategoryService', () => {
         expect(mockCategoryRepository.create).toHaveBeenCalledOnce();
     });
 
-    // CENÁRIO 2: Criar categoria com nome duplicado
-    
     it('Lança CategoryAlreadyExists quando o nome já está cadastrado', async () => {
-        // Nome já existe no banco
         mockCategoryRepository.findByName.mockResolvedValue({
             id: 'cat-existente',
             name: 'Eletrônicos'
@@ -51,12 +45,9 @@ describe('CategoryService', () => {
             categoryService.create('Eletrônicos', 'imagem eletrônica')
         ).rejects.toThrow(CategoryAlreadyExists);
 
-        // create nunca deve ser chamado se o nome já existe
         expect(mockCategoryRepository.create).not.toHaveBeenCalled();
     });
 
-    // CENÁRIO 3: Buscar categoria por ID inexistente
-    
     it('Lança CategoryNotFound quando a categoria não existe', async () => {
         mockCategoryRepository.findById.mockResolvedValue(null);
 
@@ -65,8 +56,6 @@ describe('CategoryService', () => {
         ).rejects.toThrow(CategoryNotFound);
     });
 
-    // CENÁRIO 4: Deletar categoria inexistente
-    
     it('Lança CategoryNotFound ao tentar deletar categoria inexistente', async () => {
         mockCategoryRepository.findById.mockResolvedValue(null);
 
@@ -74,11 +63,8 @@ describe('CategoryService', () => {
             categoryService.delete('id-inexistente')
         ).rejects.toThrow(CategoryNotFound);
 
-        // deleteById nunca deve ser chamado
         expect(mockCategoryRepository.deleteById).not.toHaveBeenCalled();
     });
-
-    // CENÁRIO 5: Listar todas as categorias
 
     it('Retorna todas as categorias corretamente', async () => {
         mockCategoryRepository.findAll.mockResolvedValue([

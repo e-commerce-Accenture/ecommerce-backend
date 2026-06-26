@@ -34,15 +34,11 @@ describe('CartService', () => {
         );
     });
 
-    // CENÁRIO 1: Buscar carrinho de um usuário existente
-   
     it('Retorna o carrinho quando o usuário existe', async () => {
         const userId = 'uuid-123';
 
-        // Simula q o usuário existe
         mockUserRepository.findById.mockResolvedValue({ id: userId, name: 'João' });
 
-        // Simula o carrinho do usuário
         mockCartRepository.findByUserId.mockResolvedValue({
             id: 'cart-uuid',
             userId,
@@ -56,10 +52,7 @@ describe('CartService', () => {
         expect(mockCartRepository.findByUserId).toHaveBeenCalledWith(userId);
     });
 
-    // CENÁRIO 2: Buscar carrinho de usuário inexistente
-   
     it('Lança UserNotFound quando o usuário não existe', async () => {
-        // Simula que o usuário não foi encontrado
         mockUserRepository.findById.mockResolvedValue(null);
 
         await expect(
@@ -69,8 +62,6 @@ describe('CartService', () => {
         expect(mockCartRepository.findByUserId).not.toHaveBeenCalled();
     });
 
-    // CENÁRIO 3: Remover produto do carrinho
-  
     it('Remove um produto do carrinho corretamente', async () => {
         const userId = 'uuid-123';
         const productId = 'prod-456';
@@ -84,7 +75,6 @@ describe('CartService', () => {
 
         await cartService.removeProduct(userId, productId);
 
-        // Verifica que o deleteItem foi chamado com os parâmetros certos
         expect(mockCartRepository.deleteItem).toHaveBeenCalledWith(userId, productId);
     });
 

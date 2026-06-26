@@ -19,8 +19,6 @@ describe('UserService', () => {
         userService = new UserService(mockUserRepository);
     });
 
-    // CENÁRIO 1: Listar todos os usuários sem passwordHash
-
     it('Retorna todos os usuários sem o passwordHash', async () => {
         mockUserRepository.findAll.mockResolvedValue([
             { id: 'uuid-1', name: 'João', email: 'joao@teste.com', passwordHash: 'hash1', role: 'client' },
@@ -29,7 +27,6 @@ describe('UserService', () => {
 
         const result = await userService.findAll();
 
-        // Nenhum usuário deve ter passwordHash
         expect(result).toHaveLength(2);
         result.forEach(user => {
             expect(user).not.toHaveProperty('passwordHash');
@@ -37,8 +34,6 @@ describe('UserService', () => {
         expect(result[0].name).toBe('João');
         expect(result[1].name).toBe('Maria');
     });
-
-    // CENÁRIO 2: Buscar usuário por ID existente
 
     it('Retorna um usuário sem passwordHash quando o ID existe', async () => {
         mockUserRepository.findById.mockResolvedValue({
@@ -56,8 +51,6 @@ describe('UserService', () => {
         expect(result.name).toBe('João');
     });
 
-    // CENÁRIO 3: Buscar usuário com ID inexistente
-    
     it('Lança UserNotFound quando o ID não existe', async () => {
         mockUserRepository.findById.mockResolvedValue(null);
 
@@ -66,25 +59,17 @@ describe('UserService', () => {
         ).rejects.toThrow(UserNotFound);
     });
 
-    // CENÁRIO 4: Atualizar usuário com email já em uso
-
     it('Lança EmailAlreadyExists quando o email novo já está em uso', async () => {
-       
         mockUserRepository.findById.mockResolvedValue({ id: 'uuid-1', email: 'joao@teste.com' });
-
-        
         mockUserRepository.findByEmail.mockResolvedValue({ id: 'uuid-1', email: 'novo@teste.com' });
 
         await expect(
             userService.update('uuid-1', { email: 'novo@teste.com' })
         ).rejects.toThrow(EmailAlreadyExists);
 
-        
         expect(mockUserRepository.update).not.toHaveBeenCalled();
     });
 
-    // CENÁRIO 5: Deletar usuário inexistente
-  
     it('Lança UserNotFound ao tentar deletar um ID que não existe', async () => {
         mockUserRepository.findById.mockResolvedValue(null);
 
@@ -92,7 +77,6 @@ describe('UserService', () => {
             userService.delete('id-inexistente')
         ).rejects.toThrow(UserNotFound);
 
-        // deleteById nunca deve ser chamado se o usuário não existe
         expect(mockUserRepository.deleteById).not.toHaveBeenCalled();
     });
 
