@@ -128,7 +128,7 @@ Lá você encontrará a listagem de todos os endpoints disponíveis, parâmetros
 
 ---
 
-## 🧪 Executando Testes
+## Executando Testes
 
 Para rodar a suíte de testes unitários desenvolvida com **Vitest**:
 
