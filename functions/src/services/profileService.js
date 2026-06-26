@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { UserNotFound } from "../utils/exceptions.js";
+import { UserNotFound, EmailAlreadyExists } from "../utils/exceptions.js";
 
 export class ProfileService {
     constructor(userRepository, profileRepository) {
@@ -30,7 +30,7 @@ export class ProfileService {
     async updateProfile(id, userData, addressData) {
         try {
             const emailExist = await this.userRepository.findByEmail(userData.email);
-            if (emailExist && userData.email == emailExist.email) throw new EmailAlreadyExists(`Email ${data.email} already exists`);
+            if (emailExist && userData.email == emailExist.email) throw new EmailAlreadyExists(`Email ${userData.email} already exists`);
             
             const updatedUser = await this.userRepository.update(id, userData);
             const updatedProfile = await this.profileRepository.update(id, addressData);
