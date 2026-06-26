@@ -135,3 +135,14 @@ Para rodar a suíte de testes unitários desenvolvida com **Vitest**:
 ```bash
 npm run test
 ```
+
+---
+
+## Projeto desenvolvido por:
+
+* [Rafael Wergilyds Lima de Lira](https://www.linkedin.com/in/rafaelwergilyds/)
+* [Rodrigo Paes Bolzani](https://linkedin.com/in/rodrigo-paes-909806240)
+* [Alana Vitória](https://www.linkedin.com/in/alana-vit%C3%B3ria/)
+* [David Lucas da Silva](https://www.linkedin.com/in/david-lucas1/)
+* [Thiago Cavalcanti Da Silva](https://www.linkedin.com/in/thiago-cavalcanti-b74a75289/)
+* [Rodolfo Leal](https://www.linkedin.com/in/rodolfoleal-/)
