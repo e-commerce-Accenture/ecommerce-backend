@@ -1,143 +1,246 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { ProductController } from '../../controllers/productsController.js';
+import { ProductService } from '../../services/productService.js';
 
 vi.mock('../../services/productService.js');
 
-import productsService from '../../services/productService.js';
-import {
-    getProdutos,
-    getProdutoPorId,
-    getProdutosCancelados,
-    criarProduto,
-    atualizarProduto,
-    deletarProduto,
-    reativarProduto
-} from '../../controllers/productsController.js';
-
-describe('Products Controller', () => {
+describe('ProductController', () => {
     let req;
     let res;
+    let next;
+    let controller;
 
     beforeEach(() => {
         req = {
             params: {},
-            body: {}
+            body: {},
+            validated: {
+                body: {}
+            }
         };
         res = {
             status: vi.fn().mockReturnThis(),
             send: vi.fn(),
             json: vi.fn()
         };
+        next = vi.fn();
+        controller = new ProductController();
         vi.clearAllMocks();
     });
 
-    describe('getProdutos', () => {
-        it('deve retornar status 200 e a lista de produtos ativos', () => {
-            const mockList = [{ id: 1, nome: 'Produto A', ativo: true }];
-            productsService.listarTodos.mockReturnValue(mockList);
+    describe('createProduct', () => {
+        it('deve retornar status 200 e o produto criado em caso de sucesso', async () => {
+            const productData = { name: 'P1', currentPrice: 10, originalPrice: 12, discount: 2, image: 'img', categoryId: 'cat', description: 'desc', stock: 5, brand: 'brand' };
+            req.validated.body = productData;
+            ProductService.prototype.create.mockResolvedValue({ id: 'uuid-123', ...productData });
 
-            getProdutos(req, res);
+            await controller.createProduct(req, res, next);
 
-            expect(productsService.listarTodos).toHaveBeenCalled();
+            expect(ProductService.prototype.create).toHaveBeenCalledWith(productData);
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.send).toHaveBeenCalledWith(mockList);
+            expect(res.json).toHaveBeenCalledWith({ id: 'uuid-123', ...productData });
+            expect(next).not.toHaveBeenCalled();
         });
 
-        it('deve retornar status de erro correspondente se falhar', () => {
-            const error = new Error('Falha no banco');
-            error.statusCode = 500;
-            productsService.listarTodos.mockImplementation(() => {
-                throw error;
-            });
+        it('deve chamar next(error) em caso de falha', async () => {
+            const error = new Error('Falha');
+            ProductService.prototype.create.mockRejectedValue(error);
 
-            getProdutos(req, res);
+            await controller.createProduct(req, res, next);
 
-            expect(res.status).toHaveBeenCalledWith(500);
-            expect(res.json).toHaveBeenCalledWith({ error: 'Falha no banco' });
+            expect(next).toHaveBeenCalledWith(error);
         });
     });
 
-    describe('getProdutoPorId', () => {
-        it('deve retornar o produto se encontrado', () => {
-            req.params.id = '1';
-            const mockProduct = { id: 1, nome: 'Produto A' };
-            productsService.buscarPorId.mockReturnValue(mockProduct);
+    describe('getProducts', () => {
+        it('deve retornar 200 e todos os produtos', async () => {
+            const mockList = [{ id: '1', name: 'P1' }];
+            ProductService.prototype.findAll.mockResolvedValue(mockList);
 
-            getProdutoPorId(req, res);
+            await controller.getProducts(req, res, next);
 
-            expect(productsService.buscarPorId).toHaveBeenCalledWith('1');
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(mockProduct);
-        });
-    });
-
-    describe('getProdutosCancelados', () => {
-        it('deve retornar a lista de produtos cancelados', () => {
-            const mockList = [{ id: 2, nome: 'Produto B', ativo: false }];
-            productsService.listarCancelados.mockReturnValue(mockList);
-
-            getProdutosCancelados(req, res);
-
-            expect(productsService.listarCancelados).toHaveBeenCalled();
+            expect(ProductService.prototype.findAll).toHaveBeenCalled();
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith(mockList);
         });
-    });
 
-    describe('criarProduto', () => {
-        it('deve retornar 201 e o produto criado', () => {
-            req.body = { nome: 'Produto Novo' };
-            const mockProduct = { id: 3, nome: 'Produto Novo' };
-            productsService.criar.mockReturnValue(mockProduct);
+        it('deve chamar next(error) em caso de falha', async () => {
+            const error = new Error('Falha');
+            ProductService.prototype.findAll.mockRejectedValue(error);
 
-            criarProduto(req, res);
+            await controller.getProducts(req, res, next);
 
-            expect(productsService.criar).toHaveBeenCalledWith(req.body);
-            expect(res.status).toHaveBeenCalledWith(201);
-            expect(res.send).toHaveBeenCalledWith(mockProduct);
+            expect(next).toHaveBeenCalledWith(error);
         });
     });
 
-    describe('atualizarProduto', () => {
-        it('deve retornar 200 e o produto atualizado', () => {
+    describe('getProductById', () => {
+        it('deve retornar 200 e o produto encontrado', async () => {
             req.params.id = '1';
-            req.body = { nome: 'Produto A Editado' };
-            const mockProduct = { id: 1, nome: 'Produto A Editado' };
-            productsService.atualizar.mockReturnValue(mockProduct);
+            const mockProduct = { id: '1', name: 'P1' };
+            ProductService.prototype.findById.mockResolvedValue(mockProduct);
 
-            atualizarProduto(req, res);
+            await controller.getProductById(req, res, next);
 
-            expect(productsService.atualizar).toHaveBeenCalledWith('1', req.body);
+            expect(ProductService.prototype.findById).toHaveBeenCalledWith('1');
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith(mockProduct);
         });
-    });
 
-    describe('deletarProduto', () => {
-        it('deve retornar 200 e mensagem de sucesso', () => {
+        it('deve chamar next(error) em caso de falha', async () => {
             req.params.id = '1';
-            const mockResponse = { mensagem: 'Produto desativado com sucesso!' };
-            productsService.deletar.mockReturnValue(mockResponse);
+            const error = new Error('Falha');
+            ProductService.prototype.findById.mockRejectedValue(error);
 
-            deletarProduto(req, res);
+            await controller.getProductById(req, res, next);
 
-            expect(productsService.deletar).toHaveBeenCalledWith('1');
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.send).toHaveBeenCalledWith(mockResponse);
+            expect(next).toHaveBeenCalledWith(error);
         });
     });
 
-    describe('reativarProduto', () => {
-        it('deve retornar 200 e o produto reativado', () => {
-            req.params.id = '2';
-            req.body = { nome: 'Produto B' };
-            const mockProduct = { id: 2, nome: 'Produto B', ativo: true };
-            productsService.reativar.mockReturnValue(mockProduct);
+    describe('getProductsByCategory', () => {
+        it('deve retornar 200 e produtos por categoria', async () => {
+            req.params.categoryId = 'cat-123';
+            const mockList = [{ id: '1', name: 'P1', categoryId: 'cat-123' }];
+            ProductService.prototype.findByCategoryId.mockResolvedValue(mockList);
 
-            reativarProduto(req, res);
+            await controller.getProductsByCategory(req, res, next);
 
-            expect(productsService.reativar).toHaveBeenCalledWith('2', 'Produto B');
+            expect(ProductService.prototype.findByCategoryId).toHaveBeenCalledWith('cat-123');
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(mockProduct);
+            expect(res.json).toHaveBeenCalledWith(mockList);
+        });
+
+        it('deve chamar next(error) em caso de falha', async () => {
+            req.params.categoryId = 'cat-123';
+            const error = new Error('Falha');
+            ProductService.prototype.findByCategoryId.mockRejectedValue(error);
+
+            await controller.getProductsByCategory(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe('getProductsByBrand', () => {
+        it('deve retornar 200 e produtos por marca', async () => {
+            req.params.brand = 'Dell';
+            const mockList = [{ id: '1', name: 'P1', brand: 'Dell' }];
+            ProductService.prototype.findByBrand.mockResolvedValue(mockList);
+
+            await controller.getProductsByBrand(req, res, next);
+
+            expect(ProductService.prototype.findByBrand).toHaveBeenCalledWith('Dell');
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith(mockList);
+        });
+
+        it('deve chamar next(error) em caso de falha', async () => {
+            req.params.brand = 'Dell';
+            const error = new Error('Falha');
+            ProductService.prototype.findByBrand.mockRejectedValue(error);
+
+            await controller.getProductsByBrand(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe('updateProduct', () => {
+        it('deve retornar 200 e o produto atualizado', async () => {
+            req.params.id = '1';
+            const updateData = { name: 'P1 Atualizado' };
+            req.validated.body = updateData;
+            ProductService.prototype.update.mockResolvedValue({ id: '1', name: 'P1 Atualizado' });
+
+            await controller.updateProduct(req, res, next);
+
+            expect(ProductService.prototype.update).toHaveBeenCalledWith('1', updateData);
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ id: '1', name: 'P1 Atualizado' });
+        });
+
+        it('deve chamar next(error) em caso de falha', async () => {
+            req.params.id = '1';
+            const error = new Error('Falha');
+            ProductService.prototype.update.mockRejectedValue(error);
+
+            await controller.updateProduct(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe('addAttribute', () => {
+        it('deve retornar 200 e o produto com novo atributo', async () => {
+            req.params.id = '1';
+            const attr = { title: 'Cor', paragraph: 'Preto' };
+            req.validated.body = attr;
+            ProductService.prototype.addAttribute.mockResolvedValue({ id: '1', attributes: [attr] });
+
+            await controller.addAttribute(req, res, next);
+
+            expect(ProductService.prototype.addAttribute).toHaveBeenCalledWith('1', attr);
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ id: '1', attributes: [attr] });
+        });
+
+        it('deve chamar next(error) em caso de falha', async () => {
+            req.params.id = '1';
+            const error = new Error('Falha');
+            ProductService.prototype.addAttribute.mockRejectedValue(error);
+
+            await controller.addAttribute(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe('removeAttribute', () => {
+        it('deve retornar 200 e o produto atualizado', async () => {
+            req.params.id = '1';
+            req.params.title = 'Cor';
+            ProductService.prototype.removeAttribute.mockResolvedValue({ id: '1', attributes: [] });
+
+            await controller.removeAttribute(req, res, next);
+
+            expect(ProductService.prototype.removeAttribute).toHaveBeenCalledWith('1', 'Cor');
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ id: '1', attributes: [] });
+        });
+
+        it('deve chamar next(error) em caso de falha', async () => {
+            req.params.id = '1';
+            req.params.title = 'Cor';
+            const error = new Error('Falha');
+            ProductService.prototype.removeAttribute.mockRejectedValue(error);
+
+            await controller.removeAttribute(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe('deleteProduct', () => {
+        it('deve retornar status 204 em caso de sucesso', async () => {
+            req.params.id = '1';
+            ProductService.prototype.delete.mockResolvedValue(undefined);
+
+            await controller.deleteProduct(req, res, next);
+
+            expect(ProductService.prototype.delete).toHaveBeenCalledWith('1');
+            expect(res.status).toHaveBeenCalledWith(204);
+            expect(res.send).toHaveBeenCalled();
+        });
+
+        it('deve chamar next(error) em caso de falha', async () => {
+            req.params.id = '1';
+            const error = new Error('Falha');
+            ProductService.prototype.delete.mockRejectedValue(error);
+
+            await controller.deleteProduct(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
         });
     });
 });
