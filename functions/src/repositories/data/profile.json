@@ -11,5 +11,17 @@
       "city": "Recife",
       "state": "PB"
     }
+  },
+  {
+    "id": "5e6ef1b4-e808-4ec3-9e0f-848028272c65",
+    "userId": "cd31ca13-9935-487a-9650-9c0f910db6e9",
+    "phone": "",
+    "address": {
+      "cep": "",
+      "street": "",
+      "number": "",
+      "city": "",
+      "state": ""
+    }
   }
 ]
