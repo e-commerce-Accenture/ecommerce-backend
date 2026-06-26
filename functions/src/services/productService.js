@@ -19,6 +19,7 @@ export class ProductService {
             discount: data.discount,
             image: data.image,
             categoryId: data.categoryId,
+            description: data.description,
             stock: data.stock,
             brand: data.brand,
             active: data.active ?? true,

@@ -12,11 +12,13 @@ import errorHandler from './middleware/errorHandler.js';
 import registerRouter from './routes/registerRouter.js'
 import profileRouter from './routes/profileRouter.js'
 import { authMiddleware } from './middleware/auth.js';
+import { setupSwagger } from './docs/swagger.js';
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+setupSwagger(app)
 
 app.use("/auth", authRouter);
 app.use("/users/register", registerRouter)

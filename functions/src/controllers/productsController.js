@@ -14,6 +14,7 @@ export class ProductController {
             discount,
             image,
             categoryId,
+            description,
             stock,
             brand
         } = req.validated.body;
@@ -26,6 +27,7 @@ export class ProductController {
                 discount,
                 image,
                 categoryId,
+                description,
                 stock,
                 brand
             });
@@ -92,6 +94,7 @@ export class ProductController {
             discount,
             image,
             categoryId,
+            description,
             stock,
             brand,
             active
@@ -105,6 +108,7 @@ export class ProductController {
                 discount,
                 image,
                 categoryId,
+                description,
                 stock,
                 brand,
                 active

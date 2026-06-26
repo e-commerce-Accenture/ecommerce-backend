@@ -8,6 +8,7 @@ export const createProductSchema = z.object({
         discount: z.number({ required_error: "discount is required" }),
         image: z.string({ required_error: "image is required" }),
         categoryId: z.string({ required_error: "categoryId is required" }),
+        description: z.string({ required_error: "description is required" }).optional(),
         stock: z.number({ required_error: "stock is required" }),
         brand: z.string({ required_error: "brand is required" }).min(2)
     }).strict()
@@ -21,6 +22,7 @@ export const updateProductSchema = z.object({
         discount: z.number({ required_error: "discount is required" }).optional(),
         image: z.string({ required_error: "image is required" }).optional(),
         categoryId: z.string({ required_error: "categoryId is required" }).optional(),
+        description: z.string({ required_error: "description is required" }).optional(),
         stock: z.number({ required_error: "stock is required" }).optional(),
         brand: z.string({ required_error: "brand is required" }).min(2).optional(),
         active: z.boolean({ required_error: "active is required" }).optional()
