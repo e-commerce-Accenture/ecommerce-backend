@@ -1,4 +1,4 @@
-# NextGen E-Commerce Backend 🚀
+# NextGen E-Commerce Backend
 
 Este é o repositório de backend para a plataforma **NextGen E-Commerce**, desenvolvido como projeto final do Bootcamp da Accenture. O projeto consiste em uma API RESTful robusta desenvolvida em **Node.js** com **Express**, estruturada para ser executada como **Firebase Cloud Functions** e integrada com a API do **Google Gemini** para recursos de Inteligência Artificial.
 
@@ -6,7 +6,7 @@ Para fins de portabilidade e facilidade de execução local, o projeto utiliza a
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Runtime**: Node.js (v22+)
 - **Framework Web**: Express.js
@@ -19,7 +19,7 @@ Para fins de portabilidade e facilidade de execução local, o projeto utiliza a
 
 ---
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 A estrutura básica do diretório `functions` é a seguinte:
 
@@ -44,7 +44,7 @@ functions/
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+## Como Executar o Projeto Localmente
 
 ### 1. Pré-requisitos
 Certifique-se de ter instalado em sua máquina:
@@ -78,7 +78,7 @@ JWT_EXPIRATION=1h
 GEMINI_API_KEY=sua_chave_da_api_do_gemini_aqui
 ```
 
-> 💡 **Dica**: Você pode obter uma chave de API para o Google Gemini no [Google AI Studio](https://aistudio.google.com/).
+> **Dica**: Você pode obter uma chave de API para o Google Gemini no [Google AI Studio](https://aistudio.google.com/).
 
 ---
 
@@ -118,11 +118,11 @@ Os emuladores iniciarão a Cloud Function `api` baseada no Express.
 
 ---
 
-## 📝 Documentação da API (Swagger)
+## Documentação da API (Swagger)
 
 Quando o servidor Express convencional estiver rodando (Opção A), você poderá acessar a documentação interativa da API via Swagger no seguinte endereço:
 
-👉 **[http://localhost:8000/api-docs](http://localhost:8000/api-docs)**
+**[http://localhost:8000/api-docs](http://localhost:8000/api-docs)**
 
 Lá você encontrará a listagem de todos os endpoints disponíveis, parâmetros necessários e esquemas de autenticação Bearer JWT.
 
