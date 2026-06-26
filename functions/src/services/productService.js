@@ -86,12 +86,6 @@ export class ProductService {
 
             if (!isExist) throw new ProductNotFound(`Product with id ${id} not found.`);
 
-            if (data.name) {
-                const nameExists = await this.productRepository.findByName(data.name);
-
-                if (nameExists && data.name == nameExists.name) throw new ProductAlreadyExists(`Name ${data.name} already exists`);
-            }
-
             const updatedProduct = await this.productRepository.update(id, data);
 
             return updatedProduct;
