@@ -6,6 +6,7 @@ import userRouter from './routes/userRouter.js';
 import cartRouter from './routes/cartRouter.js';
 import AIRouter from './routes/AIRouter.js';
 import categoryRouter from './routes/categoryRouter.js';
+import bannerRouter from './routes/bannerRouter.js'
 import productRouter from './routes/productRouter.js';
 import errorHandler from './middleware/errorHandler.js';
 import registerRouter from './routes/registerRouter.js'
@@ -19,11 +20,12 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/users/register", registerRouter)
 app.use("/products", productRouter);
+app.use("/categories", categoryRouter);
+app.use("/banners", bannerRouter);
 app.use(authMiddleware);
 app.use("/users", userRouter);
 app.use('/profile', profileRouter)
 app.use("/cart", cartRouter);
-app.use("/categories", categoryRouter);
 app.use('/ai', AIRouter)
 app.use(errorHandler);
 

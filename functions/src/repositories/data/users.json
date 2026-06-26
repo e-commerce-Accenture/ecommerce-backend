@@ -5,5 +5,12 @@
     "email": "admin@nextgen.com",
     "passwordHash": "$2b$10$giQaVaq9iiBZT6pI.rMY6.2LvdsGtMluu8k0CMjx4dW92PpS5yW8O",
     "role": "admin"
+  },
+  {
+    "id": "cd31ca13-9935-487a-9650-9c0f910db6e9",
+    "name": "fire",
+    "email": "fire@gmail.com",
+    "passwordHash": "$2b$10$FOYp5.D7cbYa5gyQXCjVyeMbxAtQJaRfqsTyCbvevhQcEHRL5TjAO",
+    "role": "client"
   }
 ]

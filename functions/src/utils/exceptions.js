@@ -43,6 +43,13 @@ class UserNotFound extends NotFoundException {
     }
 }
 
+class BannerNotFound extends NotFoundException {
+    constructor(message) {
+        super(message, 404);
+        this.name = 'BannerNotFound';
+    }
+}
+
 class CategoryNotFound extends NotFoundException {
     constructor(message) {
         super(message, 404);
@@ -100,6 +107,7 @@ export {
     CategoryNotFound,
     UserAlreadyExists,
     EmailAlreadyExists,
+    BannerNotFound,
     CategoryAlreadyExists,
     InvalidCredentials,
     UnauthorizedException,
